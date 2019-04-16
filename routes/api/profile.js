@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
+var ObjectId = require('mongodb').ObjectID;
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
@@ -186,6 +187,28 @@ router.post(
       // Add to words array
       profile.words.unshift(newWord);
       WordCollection.collection.insertOne(newWord);
+      allWords.unshift(newWord);
+      console.log('array ' + JSON.stringify(allWords));
+
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
+// @route  POST api/word/:word_id
+// @desc   Delete a word from profile
+// @access Private
+router.delete(
+  '/word/:word_id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const removeIndex = profile.words
+        .map(word => word.id)
+        .indexOf(req.params.word_id);
+
+      //Splice out of array
+      profile.words.splice(removeIndex, 1);
 
       profile.save().then(profile => res.json(profile));
     });

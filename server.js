@@ -6,6 +6,7 @@ const app = express();
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const words = require('./routes/api/words');
+const posts = require('./routes/api/posts');
 const passport = require('passport');
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +28,7 @@ require('./config/passport')(passport);
 app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/words', words);
+app.use('/api/posts', posts);
 
 const port = process.env.PORT || 5000;
 
