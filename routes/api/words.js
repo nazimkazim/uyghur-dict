@@ -9,7 +9,7 @@ const passport = require('passport');
 // @access Public
 router.get('/test', (req, res) => res.json({ msg: 'Words works' }));
 
-// @route  POST api/profile/word
+// @route  POST api/words
 // @desc   Add words to profile
 // @access Private
 router.post(
@@ -39,6 +39,53 @@ router.post(
     });
 
     newWord.save().then(word => res.json(word));
+  }
+);
+
+// @route  GET api/words
+// @desc   Dislay all words
+// @access Public
+router.get('/', (req, res) => {
+  Word.find()
+    .sort({ date: -1 })
+    .then(words => res.json(words))
+    .catch(err => res.status(404).json({ nonwordsfound: 'No words found' }));
+});
+
+//@route  Get api/words/:id
+//@desc   Get word by id
+//@access Public
+router.get('/:id', (req, res) => {
+  Word.findById(req.params.id)
+    .then(word => res.json(word))
+    .catch(err =>
+      res.status(404).json({ nonwordfound: 'No word found with that ID' })
+    );
+});
+
+//@route  DELETE api/words/:id
+//@desc   DELETE word
+//@access Private
+
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Word.findById(req.params.id)
+        .then(word => {
+          // Check for post owner
+          if (word.user.toString() !== req.user.id) {
+            return res
+              .status(401)
+              .json({ notauthorized: 'User not authorized' });
+          }
+
+          // Delete
+          word.remove().then(() => res.json({ success: true }));
+        })
+        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+    });
   }
 );
 
