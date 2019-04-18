@@ -25,6 +25,7 @@ router.post(
     }
 
     const newWord = new Word({
+      user: req.user.id,
       ugrWordCyr: req.body.ugrWordCyr,
       rusTranslation: req.body.rusTranslation,
       example: req.body.example,
