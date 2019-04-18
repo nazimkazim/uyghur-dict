@@ -6,13 +6,12 @@ var ObjectId = require('mongodb').ObjectID;
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
-const validateWordInput = require('../../validation/word');
 
 // Load profile model
 const Profile = require('../../models/Profile');
 
 // Load word collection model
-const WordCollection = require('../../models/WordCollection');
+const WordCollection = require('../../models/Word');
 
 // Load user profile
 const User = require('../../models/User');
@@ -152,45 +151,6 @@ router.post(
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
-    });
-  }
-);
-
-// @route  POST api/profile/word
-// @desc   Add words to profile
-// @access Private
-router.post(
-  '/word',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateWordInput(req.body);
-
-    // Check validation
-    if (!isValid) {
-      // Return any errors
-      return res.status(400).json(errors);
-    }
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      const newWord = {
-        ugrWordCyr: req.body.ugrWordCyr,
-        rusTranslation: req.body.rusTranslation,
-        example: req.body.example,
-        exampleTranslation: req.body.exampleTranslation,
-        origin: req.body.origin,
-        sphere: req.body.sphere,
-        lexis: req.body.lexis,
-        grammar: req.body.grammar,
-        partOfSpeech: req.body.partOfSpeech,
-        style: req.body.style
-      };
-
-      // Add to words array
-      profile.words.unshift(newWord);
-      WordCollection.collection.insertOne(newWord);
-      allWords.unshift(newWord);
-      console.log('array ' + JSON.stringify(allWords));
-
-      profile.save().then(profile => res.json(profile));
     });
   }
 );

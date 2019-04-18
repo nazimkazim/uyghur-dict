@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const word = require('./Word');
 
 // Create schema
 const ProfileSchema = new Schema({
@@ -31,7 +30,6 @@ const ProfileSchema = new Schema({
   gender: {
     type: String
   },
-  words: [word],
   education: {
     type: String
   },

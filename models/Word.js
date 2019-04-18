@@ -6,6 +6,10 @@ const wordSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
+  date: {
+    type: Date,
+    default: Date.now
+  },
   ugrWordCyr: {
     type: String,
     required: true
@@ -40,4 +44,4 @@ const wordSchema = new Schema({
   }
 });
 
-module.exports = wordSchema;
+module.exports = Word = mongoose.model('words', wordSchema);
