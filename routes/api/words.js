@@ -42,6 +42,51 @@ router.post(
   }
 );
 
+// @route  Put api/words/:id
+// @desc   Update a word by id
+// @access Private
+
+router.put(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateWordInput(req.body);
+
+    // Check validation
+    if (!isValid) {
+      // Return any errors
+      return res.status(400).json(errors);
+    }
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Word.findById(req.params.id)
+        .then(word => {
+          // Check for post owner
+          if (word.user.toString() !== req.user.id) {
+            return res
+              .status(401)
+              .json({ notauthorized: 'User not authorized' });
+          }
+
+          const wordID = req.params.id;
+          const wordInput = req.body;
+
+          // Update
+          Word.findByIdAndUpdate(
+            { _id: wordID },
+            { $set: wordInput },
+            { returnOriginal: false },
+            (err, word) => {
+              if (err) {
+                console.log(err);
+              }
+            }
+          ).then(word => res.json(word));
+        })
+        .catch(err => res.status(404).json({ nowordfound: 'No word found' }));
+    });
+  }
+);
+
 // @route  GET api/words
 // @desc   Dislay all words
 // @access Public
