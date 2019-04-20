@@ -24,21 +24,32 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    const newWord = new Word({
-      user: req.user.id,
-      ugrWordCyr: req.body.ugrWordCyr,
-      rusTranslation: req.body.rusTranslation,
-      example: req.body.example,
-      exampleTranslation: req.body.exampleTranslation,
-      origin: req.body.origin,
-      sphere: req.body.sphere,
-      lexis: req.body.lexis,
-      grammar: req.body.grammar,
-      partOfSpeech: req.body.partOfSpeech,
-      style: req.body.style
-    });
+    Word.find({}).then(word => {
+      if (
+        word.filter(wrd => wrd.ugrWordCyr.toString() === req.body.ugrWordCyr)
+          .length !== 0
+      ) {
+        return res
+          .status(404)
+          .json({ wordalreadyexists: 'Word already exists' });
+      } else {
+        const newWord = new Word({
+          user: req.user.id,
+          ugrWordCyr: req.body.ugrWordCyr,
+          rusTranslation: req.body.rusTranslation,
+          example: req.body.example,
+          exampleTranslation: req.body.exampleTranslation,
+          origin: req.body.origin,
+          sphere: req.body.sphere,
+          lexis: req.body.lexis,
+          grammar: req.body.grammar,
+          partOfSpeech: req.body.partOfSpeech,
+          style: req.body.style
+        });
 
-    newWord.save().then(word => res.json(word));
+        newWord.save().then(word => res.json(word));
+      }
+    });
   }
 );
 
@@ -60,7 +71,7 @@ router.put(
     Profile.findOne({ user: req.user.id }).then(profile => {
       Word.findById(req.params.id)
         .then(word => {
-          // Check for post owner
+          // Check for word owner
           if (word.user.toString() !== req.user.id) {
             return res
               .status(401)
