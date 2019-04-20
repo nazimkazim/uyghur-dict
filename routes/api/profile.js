@@ -42,7 +42,7 @@ router.get(
   }
 );
 
-// @route  POST api/profile/handle/:handle
+// @route  Get api/profile/handle/:handle
 // @desc   Get profile by handle
 // @access Public
 router.get('/handle/:handle', (req, res) => {
@@ -59,7 +59,7 @@ router.get('/handle/:handle', (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
-// @route  POST api/profile/all
+// @route  Get api/profile/all
 // @desc   Get all profiles
 // @access Public
 router.get('/all', (req, res) => {
@@ -155,24 +155,6 @@ router.post(
   }
 );
 
-// @route  POST api/word/:word_id
-// @desc   Delete a word from profile
-// @access Private
-router.delete(
-  '/word/:word_id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      const removeIndex = profile.words
-        .map(word => word.id)
-        .indexOf(req.params.word_id);
 
-      //Splice out of array
-      profile.words.splice(removeIndex, 1);
-
-      profile.save().then(profile => res.json(profile));
-    });
-  }
-);
 
 module.exports = router;
