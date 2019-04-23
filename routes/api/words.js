@@ -26,8 +26,11 @@ router.post(
 
     Word.find({}).then(word => {
       if (
-        word.filter(wrd => wrd.ugrWordCyr.toString() === req.body.ugrWordCyr)
-          .length !== 0
+        word.filter(
+          wrd =>
+            wrd.ugrWordCyr.toString().toLowerCase() ===
+            req.body.ugrWordCyr.toLowerCase()
+        ).length !== 0
       ) {
         return res
           .status(404)
