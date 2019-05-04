@@ -1,25 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const passport = require('passport');
-var ObjectId = require('mongodb').ObjectID;
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
 
 // Load profile model
 const Profile = require('../../models/Profile');
-
-// Load word collection model
-const WordCollection = require('../../models/Word');
-
-// Load user profile
-const User = require('../../models/User');
-
-// @route  GET api/profile/test
-// @desc   tests profile route
-// @access Public
-router.get('/test', (req, res) => res.json({ msg: 'Profile works' }));
 
 // @route  GET api/profile
 // @desc   Get current user's profile
@@ -154,7 +141,5 @@ router.post(
     });
   }
 );
-
-
 
 module.exports = router;
