@@ -25,7 +25,7 @@ module.exports = function validateProfileInput(data) {
   }
 
   if (Validator.isEmpty(data.languages)) {
-    errors.languages = 'City field is required';
+    errors.languages = 'Languages field is required';
   }
 
   if (!isEmpty(data.vk)) {

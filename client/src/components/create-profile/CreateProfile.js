@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
+import { createProfile } from '../../actions/profileActions';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ class CreateProfile extends Component {
       displaySocialInputs: '',
       country: '',
       city: '',
-      languages: [],
+      languages: '',
       bio: '',
       gender: '',
       education: '',
@@ -27,9 +29,26 @@ class CreateProfile extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
-    console.log('submit');
+    const profileData = {
+      handle: this.state.handle,
+      country: this.state.country,
+      city: this.state.city,
+      gender: this.state.gender,
+      languages: this.state.languages,
+      education: this.state.education,
+      vk: this.state.vk,
+      instagram: this.state.instagram,
+      facebook: this.state.facebook
+    };
+    this.props.createProfile(profileData, this.props.history);
   }
 
   onChange(e) {
@@ -71,6 +90,13 @@ class CreateProfile extends Component {
         </div>
       );
     }
+
+    const options = [
+      { label: 'Select a gender', value: 0 },
+      { label: 'Male', value: 'Male' },
+      { label: 'Female', value: 'Female' }
+    ];
+
     return (
       <div className="create-profile">
         <div className="container">
@@ -119,6 +145,14 @@ class CreateProfile extends Component {
                   error={errors.languages}
                   info="Please use comma separated values (e.g. Kazakh, Uzbek, Uyghur, Russian )"
                 />
+                <SelectListGroup
+                  placeholder="Male"
+                  name="gender"
+                  value={this.state.gender}
+                  onChange={this.onChange}
+                  error={errors.gender}
+                  options={options}
+                />
                 <TextAreaFieldGroup
                   placeholder="Short bio"
                   name="bio"
@@ -128,6 +162,7 @@ class CreateProfile extends Component {
                 />
                 <div className="mb-3">
                   <button
+                    type="button"
                     onClick={() => {
                       this.setState(prevState => ({
                         displaySocialInputs: !prevState.displaySocialInputs
@@ -164,4 +199,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(withRouter(CreateProfile));
