@@ -15,6 +15,8 @@ import './App.css';
 import { clearCurrentProfile } from './actions/profileActions';
 import PrivateRoute from './components/common/PrivateRoute';
 import CreateProfile from './components/create-profile/CreateProfile';
+import EditProfile from './components/edit-profile/EditProfile';
+import AddWord from './components/add-word/addWord';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -55,6 +57,16 @@ function App() {
                 path="/create-profile"
                 component={CreateProfile}
               />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/edit-profile"
+                component={EditProfile}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/add-a-word" component={AddWord} />
             </Switch>
           </div>
           <Footer />
