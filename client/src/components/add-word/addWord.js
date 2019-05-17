@@ -4,6 +4,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { addWord } from '../../actions/wordActions';
 
 class AddWord extends Component {
   constructor(props) {
@@ -15,12 +16,52 @@ class AddWord extends Component {
       exampleTranslation: '',
       origin: '',
       sphere: '',
+      see: '',
       lexis: '',
       grammar: '',
       partOfSpeech: '',
       style: '',
       errors: {}
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onCheck = this.onCheck.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const wordData = {
+      ugrWordCyr: this.state.ugrWordCyr,
+      rusTranslation: this.state.rusTranslation,
+      example: this.state.example,
+      exampleTranslation: this.state.exampleTranslation,
+      origin: this.state.origin,
+      sphere: this.state.sphere,
+      see: this.state.see,
+      lexis: this.state.lexis,
+      grammar: this.state.grammar,
+      partOfSpeech: this.state.partOfSpeech,
+      style: this.state.style
+    };
+    this.props.addWord(wordData, this.props.history);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onCheck(e) {
+    this.setState({
+      current: !this.state.current
+    });
   }
   render() {
     const { errors } = this.state;
@@ -108,6 +149,10 @@ class AddWord extends Component {
         value: 'Количественное числительное'
       },
       {
+        label: 'Существительное',
+        value: 'Существительное'
+      },
+      {
         label: 'Порядковое числительное',
         value: 'Порядковое числительное'
       },
@@ -180,7 +225,6 @@ class AddWord extends Component {
       { label: 'Деепречастие', value: 'Деепречастие' },
       { label: 'Единственное число', value: 'Единственное число' },
       { label: 'Множественное число', value: 'Множественное число' },
-      { label: 'Взаимный залог', value: 'Взаимный залог' },
       { label: 'Многократный вид глагола', value: 'Многократный вид глагола' },
       { label: 'Однократный вид глагола', value: 'Однократный вид глагола' },
       { label: 'Направительный падеж', value: 'Направительный падеж' },
@@ -198,13 +242,13 @@ class AddWord extends Component {
                 Go Back
               </Link>
               <h1 className="display-4 text-center">Add Word</h1>
-              <form /* onSubmit={onSubmit} */>
+              <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Бала"
                   info="Введите слово на уйгурском"
                   name="ugrWordCyr"
                   value={this.state.ugrWordCyr}
-                  //onChange={onChange}
+                  onChange={this.onChange}
                   error={errors.ugrWordCyr}
                 />
                 <TextFieldGroup
@@ -212,15 +256,26 @@ class AddWord extends Component {
                   info="Введите слово на русском"
                   name="rusTranslation"
                   value={this.state.rusTranslation}
-                  //onChange={onChange}
+                  onChange={this.onChange}
                   error={errors.rusTranslation}
                 />
+                <div className="form-check mb-form">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    name="see"
+                    value={this.state.see}
+                    onChange={this.onCheck}
+                    id="see"
+                  />
+                  <label htmlFor="see">Смотри</label>
+                </div>
                 <TextFieldGroup
                   placeholder=""
                   info="Введите пример предложения на уйгурском"
                   name="example"
                   value={this.state.example}
-                  //onChange={onChange}
+                  onChange={this.onChange}
                   error={errors.example}
                 />
                 <TextFieldGroup
@@ -228,25 +283,25 @@ class AddWord extends Component {
                   info="Введите перевод примерного предложения на русском"
                   name="exampleTranslation"
                   value={this.state.exampleTranslation}
-                  //onChange={onChange}
+                  onChange={this.onChange}
                   error={errors.exampleTranslation}
                 />
                 <h6>Происхождение слова</h6>
                 <SelectListGroup
-                  placeholder="Male"
-                  name="gender"
-                  value={this.state.gender}
-                  //onChange={this.onChange}
-                  error={errors.gender}
+                  placeholder="Арабское"
+                  name="origin"
+                  value={this.state.origin}
+                  onChange={this.onChange}
+                  error={errors.origin}
                   options={originOptions}
                 />
                 <h6>Сфера употребления слова</h6>
                 <SelectListGroup
-                  placeholder="Male"
-                  name="gender"
-                  value={this.state.gender}
-                  //onChange={this.onChange}
-                  error={errors.gender}
+                  placeholder="Физика"
+                  name="sphere"
+                  value={this.state.sphere}
+                  onChange={this.onChange}
+                  error={errors.sphere}
                   options={sphereOptions}
                 />
                 <h6>Лексика слова</h6>
@@ -254,27 +309,41 @@ class AddWord extends Component {
                   placeholder=""
                   name="lexis"
                   value={this.state.lexis}
-                  //onChange={this.onChange}
+                  onChange={this.onChange}
                   error={errors.lexis}
                   options={lexisOptions}
                 />
                 <h6>Стиль слова</h6>
                 <SelectListGroup
                   placeholder=""
-                  name="lexis"
+                  name="style"
                   value={this.state.style}
-                  //onChange={this.onChange}
+                  onChange={this.onChange}
                   error={errors.style}
                   options={styleOptions}
                 />
                 <h6>Часть речи</h6>
                 <SelectListGroup
                   placeholder=""
-                  name="lexis"
+                  name="partOfSpeech"
                   value={this.state.partOfSpeech}
-                  //onChange={this.onChange}
+                  onChange={this.onChange}
                   error={errors.partOfSpeech}
                   options={partOfSpeechOptions}
+                />
+                <h6>Грамматика слова</h6>
+                <SelectListGroup
+                  placeholder=""
+                  name="grammar"
+                  value={this.state.grammar}
+                  onChange={this.onChange}
+                  error={errors.grammar}
+                  options={grammarOptions}
+                />
+                <input
+                  type="submit"
+                  value="submit"
+                  className="btn btn-info btn-block mt-4"
                 />
               </form>
             </div>
@@ -286,8 +355,9 @@ class AddWord extends Component {
 }
 
 AddWord.propTypes = {
+  addWord: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  erorrs: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -295,4 +365,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(withRouter(AddWord));
+export default connect(
+  mapStateToProps,
+  { addWord }
+)(withRouter(AddWord));

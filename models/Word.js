@@ -30,6 +30,10 @@ const wordSchema = new Schema({
   sphere: {
     type: String
   },
+  see: {
+    type: Boolean,
+    default: false
+  },
   lexis: {
     type: String
   },
