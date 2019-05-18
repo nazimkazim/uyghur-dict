@@ -11,6 +11,10 @@ const ProfileActions = () => {
         <i className="fab fa-black-tie text-info mr-1" />
         Add a Word
       </Link>
+      <Link to="/my-words" className="btn btn-light">
+        <i className="fab fa-black-tie text-info mr-1" />
+        My added words
+      </Link>
     </div>
   );
 };
