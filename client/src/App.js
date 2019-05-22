@@ -18,6 +18,7 @@ import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
 import AddWord from './components/add-word/AddWord';
 import MyWords from './components/my-words/MyWords';
+import EditWord from './components/edit-word/EditWord';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -71,6 +72,9 @@ function App() {
             </Switch>
             <Switch>
               <PrivateRoute exact path="/my-words" component={MyWords} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/my-words/:id" component={EditWord} />
             </Switch>
           </div>
           <Footer />

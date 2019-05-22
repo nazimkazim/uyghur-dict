@@ -1,4 +1,9 @@
-import { GET_WORDS_BY_USER, ADD_WORD } from '../actions/types';
+import {
+  GET_WORDS_BY_USER,
+  ADD_WORD,
+  UPDATE_WORD,
+  GET_WORD_BY_ID
+} from '../actions/types';
 
 const initialState = {
   words: [],
@@ -19,6 +24,15 @@ export default function(state = initialState, action) {
         words: action.payload,
         loading: false
       };
+    case GET_WORD_BY_ID:
+      return {
+        ...state,
+        word: action.payload
+      };
+    case UPDATE_WORD:
+      if (action.type === 'UPDATE_WORD') {
+        console.log(action);
+      }
     default:
       return state;
   }

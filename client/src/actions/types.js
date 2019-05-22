@@ -7,3 +7,5 @@ export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
 export const GET_PROFILES = 'GET_PROFILES';
 export const ADD_WORD = 'ADD_WORD';
 export const GET_WORDS_BY_USER = 'GET_WORDS_BY_USER';
+export const UPDATE_WORD = 'UPDATE_WORD';
+export const GET_WORD_BY_ID = 'GET_WORD_BY_ID';
