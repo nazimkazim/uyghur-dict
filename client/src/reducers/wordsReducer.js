@@ -30,9 +30,10 @@ export default function(state = initialState, action) {
         word: action.payload
       };
     case UPDATE_WORD:
-      if (action.type === 'UPDATE_WORD') {
-        console.log(action);
-      }
+      return {
+        ...state,
+        words: [action.payload, ...state.words]
+      };
     default:
       return state;
   }

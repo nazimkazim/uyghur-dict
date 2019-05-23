@@ -63,15 +63,15 @@ export const getWordByID = urlID => dispatch => {
     );
 };
 
-/* export const updateWord = (newData, id, history) => dispatch => {
+export const updateWord = (id, updatedWord, history) => dispatch => {
   axios
-    .get('/api/words/:id', newData)
+    .put(`/api/words/${id}`, updatedWord)
     .then(res => {
       dispatch({
         type: UPDATE_WORD,
-        payload: newData
+        payload: res.data
       });
-      history.push('/dashboard');
+      history.push('/my-words');
     })
     .catch(err =>
       dispatch({
@@ -79,4 +79,4 @@ export const getWordByID = urlID => dispatch => {
         payload: null
       })
     );
-}; */
+};

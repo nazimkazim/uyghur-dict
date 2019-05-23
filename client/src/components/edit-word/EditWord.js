@@ -4,7 +4,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getWordByID } from '../../actions/wordActions';
+import { getWordByID, updateWord } from '../../actions/wordActions';
 import isEmpty from '../../validation/is-empty';
 
 class EditWord extends Component {
@@ -61,6 +61,8 @@ class EditWord extends Component {
           example: word.example,
           exampleTranslation: word.exampleTranslation,
           origin: word.origin,
+          sphere: word.sphere,
+          style: word.style,
           lexis: word.lexis,
           grammar: word.grammar,
           see: word.see,
@@ -75,7 +77,6 @@ class EditWord extends Component {
   }
 
   onSubmit(e) {
-    let id = this.props.match.params.id;
     e.preventDefault();
     const wordData = {
       ugrWordCyr: this.state.ugrWordCyr,
@@ -90,9 +91,9 @@ class EditWord extends Component {
       partOfSpeech: this.state.partOfSpeech,
       style: this.state.style
     };
-    //this.props.updateWord(wordData, id, this.props.history);
-    //console.log(typeof this.props.words.words[0]._id);
-    //console.log(typeof this.props.match.params.id);
+    let id = this.props.match.params.id;
+    // Change a function to update
+    this.props.updateWord(id, wordData, this.props.history);
   }
 
   onChange(e) {
@@ -408,5 +409,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getWordByID }
+  { getWordByID, updateWord }
 )(withRouter(EditWord));
