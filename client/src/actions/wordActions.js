@@ -4,7 +4,8 @@ import {
   GET_WORDS_BY_USER,
   ADD_WORD,
   UPDATE_WORD,
-  GET_WORD_BY_ID
+  GET_WORD_BY_ID,
+  DELETE_WORD
 } from './types';
 
 export const addWord = (wordData, history) => dispatch => {
@@ -25,18 +26,19 @@ export const addWord = (wordData, history) => dispatch => {
     );
 };
 
-export const getWordsByUser = () => dispatch => {
+export const getWordsByUser = user => dispatch => {
   axios
     .get('/api/words')
-    .then(res =>
+    .then(res => {
+      let filteredWords = res.data.filter(word => word.user === user.user.id);
       dispatch({
         type: GET_WORDS_BY_USER,
-        payload: res.data
-      })
-    )
+        payload: filteredWords
+      });
+    })
     .catch(err =>
       dispatch({
-        type: GET_WORDS_BY_USER,
+        type: GET_ERRORS,
         payload: null
       })
     );
@@ -57,7 +59,7 @@ export const getWordByID = urlID => dispatch => {
     })
     .catch(err =>
       dispatch({
-        type: GET_WORD_BY_ID,
+        type: GET_ERRORS,
         payload: null
       })
     );
@@ -75,7 +77,24 @@ export const updateWord = (id, updatedWord, history) => dispatch => {
     })
     .catch(err =>
       dispatch({
-        type: UPDATE_WORD,
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const deleteWord = id => dispatch => {
+  axios
+    .delete(`/api/words/${id}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_WORD,
+        payload: id
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
         payload: null
       })
     );

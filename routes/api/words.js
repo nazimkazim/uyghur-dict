@@ -71,32 +71,33 @@ router.put(
       // Return any errors
       return res.status(400).json(errors);
     }
+
     Profile.findOne({ user: req.user.id }).then(profile => {
-      Word.findById(req.params.id)
-        .then(word => {
-          // Check for word owner
-          if (word.user.toString() !== req.user.id) {
-            return res
-              .status(401)
-              .json({ notauthorized: 'User not authorized' });
-          }
+      Word.findById(req.params.id).then(word => {
+        // Check for word owner
+        if (word.user.toString() !== req.user.id) {
+          return res.status(401).json({ notauthorized: 'User not authorized' });
+        }
 
-          const wordID = req.params.id;
-          const wordInput = req.body;
+        const wordID = req.params.id;
+        const wordInput = req.body;
 
-          // Update
-          Word.findByIdAndUpdate(
-            { _id: wordID },
-            { $set: wordInput },
-            { returnOriginal: false },
-            (err, word) => {
-              if (err) {
-                console.log(err);
-              }
+        // Update
+        Word.findByIdAndUpdate(
+          { _id: wordID },
+          { $set: wordInput },
+          { returnOriginal: false },
+          (err, word) => {
+            if (err) {
+              return res.status(404).json({
+                updatedWordAlreadyExists: 'updated word already exists'
+              });
             }
-          ).then(word => res.json(word));
-        })
-        .catch(err => res.status(404).json({ nowordfound: 'No word found' }));
+          }
+        ).then(word => {
+          res.json(word);
+        });
+      });
     });
   }
 );

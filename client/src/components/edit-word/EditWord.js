@@ -277,6 +277,11 @@ class EditWord extends Component {
     ];
     return (
       <div className="add-word">
+        {errors.updatedWordAlreadyExists && (
+          <div class="alert alert-primary" role="alert">
+            {errors.updatedWordAlreadyExists}
+          </div>
+        )}
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -348,7 +353,7 @@ class EditWord extends Component {
                 />
                 <h6>Лексика слова</h6>
                 <SelectListGroup
-                  placeholder=""
+                  placeholder="лексика"
                   name="lexis"
                   value={this.state.lexis}
                   onChange={this.onChange}
@@ -357,7 +362,7 @@ class EditWord extends Component {
                 />
                 <h6>Стиль слова</h6>
                 <SelectListGroup
-                  placeholder=""
+                  placeholder="стиль"
                   name="style"
                   value={this.state.style}
                   onChange={this.onChange}
@@ -375,7 +380,7 @@ class EditWord extends Component {
                 />
                 <h6>Грамматика слова</h6>
                 <SelectListGroup
-                  placeholder=""
+                  placeholder="грамматика"
                   name="grammar"
                   value={this.state.grammar}
                   onChange={this.onChange}
@@ -398,13 +403,13 @@ class EditWord extends Component {
 
 EditWord.propTypes = {
   getWordByID: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  updateWord: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   errors: state.errors,
-  words: state.words,
-  word: state.word
+  words: state.words
 });
 
 export default connect(

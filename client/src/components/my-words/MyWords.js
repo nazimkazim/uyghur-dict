@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
-import { getWordsByUser } from '../../actions/wordActions';
+import { getWordsByUser, deleteWord } from '../../actions/wordActions';
 import { getCurrentProfile } from '../../actions/profileActions';
 import { Link } from 'react-router-dom';
 
@@ -15,67 +15,67 @@ class MyWords extends Component {
     displayViewCard: false
   };
 
+  onDeleteClick(id) {
+    this.props.deleteWord(id);
+  }
+
   componentDidMount() {
     this.props.getCurrentProfile();
-    this.props.getWordsByUser();
+    this.props.getWordsByUser(this.props.auth);
   }
 
   render() {
     const { words } = this.props.words;
+    //console.log(words);
     const { profile, loading } = this.props.profile;
-    const { user } = this.props.auth;
     const { displayViewCard } = this.state;
     let wordItems;
     let viewCard;
-    const userID = user.id;
 
     //console.log(typeof user.id);
     if (profile === null || loading) {
       wordItems = <Spinner />;
     } else {
       if (words.length > 0) {
-        wordItems = words.map(word =>
-          word.user === userID ? (
-            <li className="list-group-item" key={word.ugrWordCyr}>
-              <div className="container">
-                <div className="row">
-                  <div className="col-sm-8">
-                    <p className="font-weight-bold">{word.ugrWordCyr}</p>
-                    {word.rusTranslation}
-                  </div>
-                  <div className="col-col-sm-4">
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-small btn-block"
-                      onClick={() => {
-                        this.setState(prevState => ({
-                          displayViewCard: !prevState.displayViewCard
-                        }));
-                      }}
-                    >
-                      View
-                    </button>
-                    <Link
-                      type="button"
-                      className="btn btn-primary btn-small btn-block"
-                      to={`/my-words/${word._id}`}
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-small btn-block"
-                    >
-                      Delete
-                    </button>
-                  </div>
+        wordItems = words.map(word => (
+          <li className="list-group-item">
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-8">
+                  <p className="font-weight-bold">{word.ugrWordCyr}</p>
+                  {word.rusTranslation}
+                </div>
+                <div className="col-col-sm-4">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-small btn-block"
+                    onClick={() => {
+                      this.setState(prevState => ({
+                        displayViewCard: !prevState.displayViewCard
+                      }));
+                    }}
+                  >
+                    View
+                  </button>
+                  <Link
+                    type="button"
+                    className="btn btn-primary btn-small btn-block"
+                    to={`/my-words/${word._id}`}
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-small btn-block"
+                    onClick={this.onDeleteClick.bind(this, word._id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
-            </li>
-          ) : (
-            ''
-          )
-        );
+            </div>
+          </li>
+        ));
       } else {
         wordItems = <h4>No words found</h4>;
       }
@@ -118,6 +118,7 @@ class MyWords extends Component {
 MyWords.propTypes = {
   getWordsByUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  deleteWord: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired
 };
 
@@ -129,5 +130,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, getWordsByUser }
+  { getCurrentProfile, getWordsByUser, deleteWord }
 )(MyWords);

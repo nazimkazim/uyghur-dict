@@ -2,7 +2,8 @@ import {
   GET_WORDS_BY_USER,
   ADD_WORD,
   UPDATE_WORD,
-  GET_WORD_BY_ID
+  GET_WORD_BY_ID,
+  DELETE_WORD
 } from '../actions/types';
 
 const initialState = {
@@ -21,8 +22,7 @@ export default function(state = initialState, action) {
     case GET_WORDS_BY_USER:
       return {
         ...state,
-        words: action.payload,
-        loading: false
+        words: action.payload
       };
     case GET_WORD_BY_ID:
       return {
@@ -33,6 +33,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         words: [action.payload, ...state.words]
+      };
+    case DELETE_WORD:
+      return {
+        ...state,
+        words: state.words.filter(word => word._id !== action.payload)
       };
     default:
       return state;

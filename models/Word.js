@@ -12,6 +12,8 @@ const wordSchema = new Schema({
   },
   ugrWordCyr: {
     type: String,
+    unique: true,
+    lowercase: true,
     required: true
   },
   rusTranslation: {
