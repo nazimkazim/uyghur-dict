@@ -4,11 +4,6 @@ const Word = require('../../models/Word');
 const validateWordInput = require('../../validation/word');
 const passport = require('passport');
 
-// @route  GET api/words/test
-// @desc   tests words route
-// @access Public
-router.get('/test', (req, res) => res.json({ msg: 'Words works' }));
-
 // @route  POST api/words
 // @desc   Add words to profile
 // @access Private
@@ -59,7 +54,6 @@ router.post(
 // @route  Put api/words/:id
 // @desc   Update a word by id
 // @access Private
-
 router.put(
   '/:id',
   passport.authenticate('jwt', { session: false }),

@@ -10,3 +10,4 @@ export const GET_WORDS_BY_USER = 'GET_WORDS_BY_USER';
 export const UPDATE_WORD = 'UPDATE_WORD';
 export const GET_WORD_BY_ID = 'GET_WORD_BY_ID';
 export const DELETE_WORD = 'DELETE_WORD';
+export const SEARCH_WORD = 'SEARCH_WORD';

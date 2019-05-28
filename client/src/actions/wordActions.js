@@ -5,7 +5,8 @@ import {
   ADD_WORD,
   UPDATE_WORD,
   GET_WORD_BY_ID,
-  DELETE_WORD
+  DELETE_WORD,
+  SEARCH_WORD
 } from './types';
 
 export const addWord = (wordData, history) => dispatch => {
@@ -17,6 +18,23 @@ export const addWord = (wordData, history) => dispatch => {
         payload: res.data
       });
       history.push('/dashboard');
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const searchWord = () => dispatch => {
+  axios
+    .get('/api/words')
+    .then(res => {
+      dispatch({
+        type: SEARCH_WORD,
+        payload: res.data
+      });
     })
     .catch(err =>
       dispatch({

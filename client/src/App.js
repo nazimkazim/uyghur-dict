@@ -19,6 +19,7 @@ import EditProfile from './components/edit-profile/EditProfile';
 import AddWord from './components/add-word/AddWord';
 import MyWords from './components/my-words/MyWords';
 import EditWord from './components/edit-word/EditWord';
+import WordSearch from './components/word_search/WordSearch';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -50,6 +51,7 @@ function App() {
           <div className="container">
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/all_words" component={WordSearch} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>

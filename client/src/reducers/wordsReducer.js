@@ -3,7 +3,8 @@ import {
   ADD_WORD,
   UPDATE_WORD,
   GET_WORD_BY_ID,
-  DELETE_WORD
+  DELETE_WORD,
+  SEARCH_WORD
 } from '../actions/types';
 
 const initialState = {
@@ -33,6 +34,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         words: [action.payload, ...state.words]
+      };
+    case SEARCH_WORD:
+      return {
+        ...state,
+        words: action.payload
       };
     case DELETE_WORD:
       return {
