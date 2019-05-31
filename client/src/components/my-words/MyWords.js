@@ -28,17 +28,14 @@ class MyWords extends Component {
     const { words } = this.props.words;
     //console.log(words);
     const { profile, loading } = this.props.profile;
-    const { displayViewCard } = this.state;
     let wordItems;
-    let viewCard;
 
-    //console.log(typeof user.id);
     if (profile === null || loading) {
       wordItems = <Spinner />;
     } else {
       if (words.length > 0) {
         wordItems = words.map(word => (
-          <li className="list-group-item">
+          <li className="list-group-item" key={word._id}>
             <div className="container">
               <div className="row">
                 <div className="col-sm-8">
@@ -46,17 +43,6 @@ class MyWords extends Component {
                   {word.rusTranslation}
                 </div>
                 <div className="col-col-sm-4">
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-small btn-block"
-                    onClick={() => {
-                      this.setState(prevState => ({
-                        displayViewCard: !prevState.displayViewCard
-                      }));
-                    }}
-                  >
-                    View
-                  </button>
                   <Link
                     type="button"
                     className="btn btn-primary btn-small btn-block"
@@ -79,23 +65,6 @@ class MyWords extends Component {
       } else {
         wordItems = <h4>No words found</h4>;
       }
-      if (displayViewCard) {
-        viewCard = (
-          <div
-            className="card border-primary mb-3"
-            style={{ maxWidth: '18rem' }}
-          >
-            <div className="card-header">Инфо о слове</div>
-            <div className="card-body text-primary">
-              <h5 className="card-title">Название</h5>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
-        );
-      }
     }
     return (
       <div className="my-word">
@@ -108,7 +77,6 @@ class MyWords extends Component {
               </ul>
             </div>
           </div>
-          <div className="col-md-8">{viewCard}</div>
         </div>
       </div>
     );

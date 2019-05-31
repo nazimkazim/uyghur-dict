@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Word = require('../../models/Word');
+const User = require('../../models/User');
+
 const validateWordInput = require('../../validation/word');
 const passport = require('passport');
 
@@ -44,8 +46,24 @@ router.post(
           partOfSpeech: req.body.partOfSpeech,
           style: req.body.style
         });
-
-        newWord.save().then(word => res.json(word));
+        newWord.save().then(word => {
+          //now update user model
+          User.findOne({ _id: req.user.id })
+            .then(foundUser => {
+              foundUser.score = foundUser.score + 150;
+              foundUser
+                .save()
+                .then(savedUser => {
+                  res.json({ word, savedUser });
+                })
+                .catch(err => {
+                  return res.status(400).json({ error: 'could not add score' });
+                });
+            })
+            .catch(err => {
+              return res.status(400).json({ error: 'could not find user' });
+            });
+        });
       }
     });
   }
@@ -83,21 +101,34 @@ router.put(
           { returnOriginal: false },
           (err, word) => {
             if (err) {
-              return res.status(404).json({
-                updatedWordAlreadyExists: 'updated word already exists'
-              });
+              console.log(err);
             }
           }
-        ).then(word => {
-          res.json(word);
-        });
+        )
+          .then(word => {
+            res.json(word);
+          })
+          .catch(err =>
+            res
+              .status(404)
+              .json({ wordcannotbeupdated: 'word cannot be updated' })
+          );
       });
     });
   }
 );
 
+// @route  GET api/words/leaders
+// @desc   Display leaders that contributed most to the project
+// @access Public
+router.get('/leaders', (req, res) => {
+  Word.find({})
+    .then(words => res.json(words))
+    .catch(err => res.status(404).json({ nonwordsfound: 'No words found' }));
+});
+
 // @route  GET api/words
-// @desc   Dislay all words
+// @desc   Dislpay all words
 // @access Public
 router.get('/', (req, res) => {
   Word.find()
@@ -136,7 +167,27 @@ router.delete(
           }
 
           // Delete
-          word.remove().then(() => res.json({ success: true }));
+          //word.remove().then(() => res.json({ success: true }));
+          word.remove().then(word => {
+            //now update user model
+            User.findOne({ _id: req.user.id })
+              .then(foundUser => {
+                foundUser.score = foundUser.score - 150;
+                foundUser
+                  .save()
+                  .then(savedUser => {
+                    res.json({ success: true, savedUser });
+                  })
+                  .catch(err => {
+                    return res
+                      .status(400)
+                      .json({ error: 'could not add score' });
+                  });
+              })
+              .catch(err => {
+                return res.status(400).json({ error: 'could not find user' });
+              });
+          });
         })
         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
     });

@@ -15,6 +15,10 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  score: {
+    type: Number,
+    default: 0
+  },
   avatar: {
     type: String
   },

@@ -33,7 +33,7 @@ export default function(state = initialState, action) {
     case UPDATE_WORD:
       return {
         ...state,
-        words: [action.payload, ...state.words]
+        words: action.payload
       };
     case SEARCH_WORD:
       return {

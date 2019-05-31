@@ -72,6 +72,11 @@ class Navbar extends Component {
                   Developers
                 </a>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/all_words">
+                  Go to the dictionary
+                </Link>
+              </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}
           </div>
