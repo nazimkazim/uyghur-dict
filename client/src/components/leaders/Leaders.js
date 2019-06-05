@@ -17,8 +17,6 @@ class Leaders extends Component {
   render() {
     const { leaders } = this.props;
     const { loading } = this.props.profile;
-    console.log(leaders.users);
-
     let showLeaders;
 
     if (!leaders.users || loading) {
@@ -59,8 +57,7 @@ class Leaders extends Component {
 }
 
 Leaders.propTypes = {
-  getLeaders: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired
+  getLeaders: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

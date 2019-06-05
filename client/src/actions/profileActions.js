@@ -47,7 +47,7 @@ export const getLeaders = () => dispatch => {
 export const getPublicProfileByID = id => dispatch => {
   console.log(id);
   axios
-    .get(`api/profile/user/${id}`)
+    .get(`/api/profile/user/${id}`)
     .then(res => {
       dispatch({
         type: GET_PUBLIC_PROFILE_BY_ID,

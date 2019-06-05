@@ -1,8 +1,8 @@
-import { GET_LEADERS } from '../actions/types';
+import { GET_LEADERS, GET_PUBLIC_PROFILE_BY_ID } from '../actions/types';
 
 const initialState = {
   users: [],
-  loading: false
+  user: {}
 };
 
 export default function(state = initialState, action) {
@@ -11,6 +11,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         users: action.payload
+      };
+    case GET_PUBLIC_PROFILE_BY_ID:
+      return {
+        ...state,
+        user: action.payload
       };
     default:
       return state;

@@ -66,9 +66,9 @@ router.get('/all', (req, res) => {
 // @route  POST api/profile/user/:user_id
 // @desc   Get profile by user ID
 // @access Public
-router.get('/user/:user_id', (req, res) => {
+router.get('/user/:id', (req, res) => {
   const errors = {};
-  Profile.findOne({ user: req.params.user_id })
+  Profile.findById(req.params.id)
     .populate('user', ['name', 'email', 'avatar'])
     .then(profile => {
       if (!profile) {

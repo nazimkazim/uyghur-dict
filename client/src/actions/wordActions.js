@@ -62,8 +62,6 @@ export const getWordsByUser = user => dispatch => {
     );
 };
 
-
-
 export const getWordByID = urlID => dispatch => {
   //console.log(urlID);
   axios

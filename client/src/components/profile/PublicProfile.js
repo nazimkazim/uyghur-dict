@@ -4,83 +4,82 @@ import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import { getPublicProfileByID } from '../../actions/profileActions';
 import { Link } from 'react-router-dom';
+import usersReducer from '../../reducers/usersReducer';
 
 class PublicProfile extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    console.log(this.props);
-    this.props.getPublicProfileByID(this.props.profile._id);
+    this.props.getPublicProfileByID(this.props.match.params.id);
   }
 
   render() {
-    const { profile, loading } = this.props.profile;
-    const { auth } = this.props;
-    console.log(profile);
+    const { loading } = this.props;
+    const { user } = this.props.user;
+    //console.table(user.user.avatar);
+    console.log(user);
     let profileShow;
 
-    if (profile === null || loading) {
+    if (user === null || loading) {
       profileShow = <Spinner />;
     } else {
       profileShow = (
         <div className="row">
           <div className="col-md-4" align="center">
-            <figure className="figure">
-              <img
-                src={auth.user.avatar}
-                className="figure-img img-fluid rounded"
-                alt={auth.user.avatar}
-              />
-            </figure>
+            {user.user ? (
+              <figure className="figure">
+                <img
+                  src={user.user.avatar}
+                  className="figure-img img-fluid rounded"
+                  alt={user.user.name}
+                />
+              </figure>
+            ) : null}
           </div>
-          <div className="col-md-6">{profile.bio}</div>
+          <div className="col-md-6">{user.bio}</div>
           <div className="col-md-2">
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
                 <div className="row">
                   <div className="col">
-                    {profile.social ? (
-                      <a href={profile.social.facebook} target="_blank">
+                    {user.social ? (
+                      <a href={user.social.facebook} target="_blank">
                         <i className="fab fa-facebook" />
                       </a>
                     ) : null}
                   </div>
                   <div className="col">
-                    {profile.social ? (
-                      <a href={profile.social.vk} target="_blank">
+                    {user.social ? (
+                      <a href={user.social.vk} target="_blank">
                         <i className="fab fa-vk" />
                       </a>
                     ) : null}
                   </div>
                   <div className="col">
-                    {profile.social ? (
-                      <a href={profile.social.instagram} target="_blank">
+                    {user.social ? (
+                      <a href={user.social.instagram} target="_blank">
                         <i className="fab fa-instagram" />
                       </a>
                     ) : null}
                   </div>
                 </div>
               </li>
-              {profile.country ? (
-                <li className="list-group-item">Страна: {profile.country}</li>
+              {user.country ? (
+                <li className="list-group-item">Страна: {user.country}</li>
               ) : null}
-              {profile.city ? (
-                <li className="list-group-item">Город: {profile.city}</li>
+              {user.city ? (
+                <li className="list-group-item">Город: {user.city}</li>
               ) : null}
-              {profile.gender ? (
-                <li className="list-group-item">Пол: {profile.gender}</li>
+              {user.gender ? (
+                <li className="list-group-item">Пол: {user.gender}</li>
               ) : null}
-              {profile.education ? (
+              {user.education ? (
                 <li className="list-group-item">
-                  Образование: {profile.education}
+                  Образование: {user.education}
                 </li>
               ) : null}
-              {profile.languages ? (
+              {user.languages ? (
                 <li className="list-group-item">
                   Языки:{' '}
-                  {profile.languages.map(language => (
+                  {user.languages.map(language => (
                     <span key={language}>{language}</span>
                   ))}
                 </li>
@@ -102,13 +101,11 @@ class PublicProfile extends Component {
 }
 
 PublicProfile.propTypes = {
-  auth: PropTypes.object.isRequired,
   getPublicProfileByID: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile,
-  auth: state.auth
+  user: state.users
 });
 
 export default connect(
