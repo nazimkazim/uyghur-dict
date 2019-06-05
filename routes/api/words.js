@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Word = require('../../models/Word');
 const User = require('../../models/User');
-
 const validateWordInput = require('../../validation/word');
 const passport = require('passport');
 
@@ -36,6 +35,7 @@ router.post(
         const newWord = new Word({
           user: req.user.id,
           ugrWordCyr: req.body.ugrWordCyr,
+          ugrWordArb: req.body.ugrWordArb,
           rusTranslation: req.body.rusTranslation,
           example: req.body.example,
           exampleTranslation: req.body.exampleTranslation,
@@ -122,16 +122,18 @@ router.put(
 // @desc   Display leaders that contributed most to the project
 // @access Public
 router.get('/leaders', (req, res) => {
-  Word.find({})
-    .then(words => res.json(words))
-    .catch(err => res.status(404).json({ nonwordsfound: 'No words found' }));
+  User.find({})
+    .sort({ score: -1 })
+    .populate('profile', ['handle'])
+    .then(users => res.json(users))
+    .catch(err => res.status(404).json({ nonusersfound: 'No users found' }));
 });
 
 // @route  GET api/words
 // @desc   Dislpay all words
 // @access Public
 router.get('/', (req, res) => {
-  Word.find()
+  Word.find({})
     .sort({ date: -1 })
     .then(words => res.json(words))
     .catch(err => res.status(404).json({ nonwordsfound: 'No words found' }));

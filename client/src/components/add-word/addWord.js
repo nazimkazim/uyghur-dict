@@ -19,6 +19,7 @@ class AddWord extends Component {
     super(props);
     this.state = {
       ugrWordCyr: '',
+      ugrWordArb: '',
       rusTranslation: '',
       example: '',
       exampleTranslation: '',
@@ -48,6 +49,7 @@ class AddWord extends Component {
     e.preventDefault();
     const wordData = {
       ugrWordCyr: this.state.ugrWordCyr,
+      ugrWordArb: this.state.ugrWordArb,
       rusTranslation: this.state.rusTranslation,
       example: this.state.example,
       exampleTranslation: this.state.exampleTranslation,
@@ -93,6 +95,14 @@ class AddWord extends Component {
                   info="Введите слово на уйгурском"
                   name="ugrWordCyr"
                   value={this.state.ugrWordCyr}
+                  onChange={this.onChange}
+                  error={errors.ugrWordCyr}
+                />
+                <TextFieldGroup
+                  placeholder="جاراڭ - جۇرۇڭ"
+                  info="Введите слово на уйгурском (арабским шрифтом)"
+                  name="ugrWordArb"
+                  value={this.state.ugrWordArb}
                   onChange={this.onChange}
                   error={errors.ugrWordCyr}
                 />

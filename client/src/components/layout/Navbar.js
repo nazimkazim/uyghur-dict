@@ -67,14 +67,22 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <a className="nav-link" href="profiles.html">
-                  {' '}
-                  Developers
+                <Link className="nav-link" to="/all_words">
+                  Перейти к словарю
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  href="https://www.lexilogos.com/keyboard/uyghur.htm"
+                  target="_blank"
+                >
+                  Конвертер с латинского на арабский
                 </a>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/all_words">
-                  Go to the dictionary
+                <Link className="nav-link" to="/leaders">
+                  Лидеры
                 </Link>
               </li>
             </ul>

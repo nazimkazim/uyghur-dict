@@ -3,7 +3,9 @@ import {
   GET_PROFILE,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
-  GET_ERRORS
+  GET_ERRORS,
+  GET_LEADERS,
+  GET_PUBLIC_PROFILE_BY_ID
 } from './types';
 
 // Get current profile
@@ -21,6 +23,41 @@ export const getCurrentProfile = () => dispatch => {
       dispatch({
         type: GET_PROFILE,
         payload: {}
+      })
+    );
+};
+
+export const getLeaders = () => dispatch => {
+  axios
+    .get('/api/profile/all')
+    .then(res => {
+      dispatch({
+        type: GET_LEADERS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_LEADERS,
+        payload: null
+      })
+    );
+};
+
+export const getPublicProfileByID = id => dispatch => {
+  console.log(id);
+  axios
+    .get(`api/profile/user/${id}`)
+    .then(res => {
+      dispatch({
+        type: GET_PUBLIC_PROFILE_BY_ID,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_PUBLIC_PROFILE_BY_ID,
+        payload: null
       })
     );
 };

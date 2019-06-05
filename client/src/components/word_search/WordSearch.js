@@ -58,6 +58,7 @@ class SearchWord extends Component {
                   <div key={word._id}>
                     <div>
                       <h1 className="display-7">{word.ugrWordCyr}</h1>
+                      {word.ugrWordArb ? word.ugrWordArb : ''}
                       <span>
                         {word.origin ? (
                           <span>

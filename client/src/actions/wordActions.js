@@ -6,8 +6,7 @@ import {
   UPDATE_WORD,
   GET_WORD_BY_ID,
   DELETE_WORD,
-  SEARCH_WORD,
-  GET_LEADERS
+  SEARCH_WORD
 } from './types';
 
 export const addWord = (wordData, history) => dispatch => {
@@ -63,26 +62,7 @@ export const getWordsByUser = user => dispatch => {
     );
 };
 
-/* export const getLeadersByID = (userID, words) => dispatch => {
-  //console.log(urlID);
-  axios
-    .get('/api/words/leaders')
-    .then(res => {
-      let word = res.data.filter(word => word._id === urlID);
-      //console.log(filteredData);
-      dispatch({
-        type: GET_LEADERS,
-        payload: word
-      });
-      //console.log(res.data);
-    })
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: null
-      })
-    );
-}; */
+
 
 export const getWordByID = urlID => dispatch => {
   //console.log(urlID);

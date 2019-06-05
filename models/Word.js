@@ -14,6 +14,9 @@ const wordSchema = new Schema({
     type: String,
     required: true
   },
+  ugrWordArb: {
+    type: String
+  },
   rusTranslation: {
     type: String,
     required: true

@@ -31,11 +31,11 @@ router.get(
 
 // @route  Get api/profile/handle/:handle
 // @desc   Get profile by handle
-// @access Public
+// @access Private
 router.get('/handle/:handle', (req, res) => {
   const errors = {};
   Profile.findOne({ handle: req.params.handle })
-    .populate('user', ['name', 'email', 'avatar'])
+    .populate('user', ['name', 'email', 'avatar', 'score'])
     .then(profile => {
       if (!profile) {
         errors.nonprofile = 'There is no profile for this user';
@@ -51,8 +51,8 @@ router.get('/handle/:handle', (req, res) => {
 // @access Public
 router.get('/all', (req, res) => {
   const errors = {};
-  Profile.find()
-    .populate('user', ['name', 'avatar', 'email'])
+  Profile.find({})
+    .populate('user', ['name', 'avatar', 'email', 'score'])
     .then(profiles => {
       if (!profiles) {
         errors.nonprofile = 'There are no profiles';

@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
-import { getCurrentProfile } from '../../actions/profileActions';
+import { getPublicProfileByID } from '../../actions/profileActions';
 import { Link } from 'react-router-dom';
 
-class Profile extends Component {
+class PublicProfile extends Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    this.props.getCurrentProfile();
+    console.log(this.props);
+    this.props.getPublicProfileByID(this.props.profile._id);
   }
+
   render() {
     const { profile, loading } = this.props.profile;
     const { auth } = this.props;
@@ -99,9 +101,9 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
+PublicProfile.propTypes = {
   auth: PropTypes.object.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired
+  getPublicProfileByID: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -111,5 +113,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
-)(Profile);
+  { getPublicProfileByID }
+)(PublicProfile);

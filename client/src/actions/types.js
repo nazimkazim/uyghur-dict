@@ -12,3 +12,4 @@ export const GET_WORD_BY_ID = 'GET_WORD_BY_ID';
 export const DELETE_WORD = 'DELETE_WORD';
 export const SEARCH_WORD = 'SEARCH_WORD';
 export const GET_LEADERS = 'GET_LEADERS';
+export const GET_PUBLIC_PROFILE_BY_ID = 'GET_PUBLIC_PROFILE_BY_ID';
