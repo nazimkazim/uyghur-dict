@@ -57,11 +57,10 @@ class EditWord extends Component {
           : '';
         word.origin = !isEmpty(word.origin) ? word.origin : '';
         word.sphere = !isEmpty(word.sphere) ? word.sphere : '';
-        word.see = !isEmpty(word.see) ? word.see : {};
-        word.lexis = !isEmpty(word.lexis) ? word.lexis : {};
-        word.grammar = !isEmpty(word.grammar) ? word.grammar : {};
-        word.see = !isEmpty(word.see) ? word.see : {};
-        word.style = !isEmpty(word.style) ? word.style : {};
+        word.see = !isEmpty(word.see) ? word.see : false;
+        word.lexis = !isEmpty(word.lexis) ? word.lexis : '';
+        word.grammar = !isEmpty(word.grammar) ? word.grammar : '';
+        word.style = !isEmpty(word.style) ? word.style : '';
 
         this.setState({
           ugrWordCyr: word.ugrWordCyr,

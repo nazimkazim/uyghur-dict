@@ -95,7 +95,7 @@ router.put(
         const wordInput = req.body;
 
         // Update
-        Word.findByIdAndUpdate(
+        Word.update(
           { _id: wordID },
           { $set: wordInput },
           { returnOriginal: false },
