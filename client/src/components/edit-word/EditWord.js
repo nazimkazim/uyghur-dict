@@ -125,7 +125,7 @@ class EditWord extends Component {
               <Link to="/my-words" className="btn btn-light">
                 Вернуться назад
               </Link>
-              <h1 className="display-4 text-center">Edit Word</h1>
+              <h1 className="display-4 text-center">Изменить слово</h1>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Бала"

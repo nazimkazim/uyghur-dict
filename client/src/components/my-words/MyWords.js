@@ -38,24 +38,24 @@ class MyWords extends Component {
           <li className="list-group-item" key={word._id}>
             <div className="container">
               <div className="row">
-                <div className="col-sm-8">
+                <div className="col-sm-6">
                   <p className="font-weight-bold">{word.ugrWordCyr}</p>
                   {word.rusTranslation}
                 </div>
-                <div className="col-col-sm-4">
+                <div className="col-col-sm-6">
                   <Link
                     type="button"
                     className="btn btn-primary btn-small btn-block"
                     to={`/my-words/${word._id}`}
                   >
-                    Edit
+                    Изменить
                   </Link>
                   <button
                     type="button"
                     className="btn btn-primary btn-small btn-block"
                     onClick={this.onDeleteClick.bind(this, word._id)}
                   >
-                    Delete
+                    Удалить
                   </button>
                 </div>
               </div>
@@ -63,7 +63,7 @@ class MyWords extends Component {
           </li>
         ));
       } else {
-        wordItems = <h4>No words found</h4>;
+        wordItems = <h4>Слов не найдено</h4>;
       }
     }
     return (
