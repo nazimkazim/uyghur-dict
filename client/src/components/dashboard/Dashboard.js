@@ -33,12 +33,12 @@ class Dashboard extends Component {
         // User is logged in but has no profile
         dashboardContent = (
           <div>
-            <p className="lead text-muted">Wellcome {user.name}</p>
+            <p className="lead text-muted">Добро пожаловать {user.name}</p>
             <p className="lead text-muted">
-              You have not setup a profile yet, please add some info
+              У вас еще нет профайла, пожалуйста напишите что-нибудь о себе
             </p>
             <Link to="/create-profile" className="btn btn-lg btn-info">
-              Create profile
+              Создайте профайл
             </Link>
           </div>
         );
@@ -48,7 +48,7 @@ class Dashboard extends Component {
       <div className="dashboard">
         <div className="row">
           <div className="col-md-12">
-            <h1 className="display-4">Dashboard</h1>
+            <h1 className="display-4">Панель управления</h1>
             {dashboardContent}
           </div>
         </div>

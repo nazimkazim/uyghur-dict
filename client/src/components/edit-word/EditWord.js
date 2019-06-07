@@ -123,7 +123,7 @@ class EditWord extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/my-words" className="btn btn-light">
-                Go Back
+                Вернуться назад
               </Link>
               <h1 className="display-4 text-center">Edit Word</h1>
               <form onSubmit={this.onSubmit}>

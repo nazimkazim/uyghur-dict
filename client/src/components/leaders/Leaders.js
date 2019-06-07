@@ -18,7 +18,6 @@ class Leaders extends Component {
     const { leaders } = this.props;
     const { loading } = this.props.profile;
     let showLeaders;
-
     if (!leaders.users || loading) {
       showLeaders = <Spinner />;
     } else {
@@ -27,18 +26,28 @@ class Leaders extends Component {
           <li className="list-group-item d-flex justify-content-between align-items-center mt-2">
             <figure className="figure">
               <img
-                src={leader.user.avatar}
+                src={
+                  leader.user
+                    ? leader.user.avatar
+                    : 'https://via.placeholder.com/150'
+                }
                 className="figure-img img-fluid rounded"
                 style={{ width: '50%' }}
-                alt={leader.user.avatar}
+                alt={leader.user ? leader.user.avatar : 'нет фотографии'}
               />
               <figcaption>
-                <Link to={`/leaders/${leader._id}`}>{leader.user.name}</Link>
+                <Link to={`/leaders/${leader._id}`}>
+                  {leader.user
+                    ? leader.user.name
+                    : 'Пользователь возможно удален'}
+                </Link>
               </figcaption>
             </figure>
-            <span>Добавил(а) {leader.user.score / 150} слов</span>
+            <span>
+              Добавил(а) {leader.user ? leader.user.score / 150 : 0} слов
+            </span>
             <span className="badge badge-primary badge-pill">
-              {leader.user.score}
+              {leader.user ? leader.user.score : 0}
             </span>
           </li>
         </div>

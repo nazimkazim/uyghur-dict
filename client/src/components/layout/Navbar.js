@@ -29,7 +29,7 @@ class Navbar extends Component {
               style={{ width: '25px', marginRight: '5px' }}
               title="You must have a gravatar connected to your email to display an image"
             />
-            Logout
+            Выйти
           </a>
         </li>
       </ul>
@@ -39,12 +39,12 @@ class Navbar extends Component {
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/register">
-            Sign Up
+            Зарегестрироваться
           </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/login">
-            Login
+            Войти
           </Link>
         </li>
       </ul>
@@ -53,7 +53,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            DevConnector
+            ئۇيغۇر لۇغەت
           </Link>
           <button
             className="navbar-toggler"

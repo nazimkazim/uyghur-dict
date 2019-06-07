@@ -65,7 +65,7 @@ class CreateProfile extends Component {
       socialInputs = (
         <div>
           <InputGroup
-            placeholder="Facebook Profile URL"
+            placeholder="Вставьте адрес вашего профайла в Facebook"
             name="facebook"
             icon="fab fa-facebook"
             value={this.state.facebook}
@@ -73,7 +73,7 @@ class CreateProfile extends Component {
             error={errors.facebook}
           />
           <InputGroup
-            placeholder="VK Profile URL"
+            placeholder="Вставьте адрес вашего профайла в VK"
             name="vk"
             icon="fab fa-vk"
             value={this.state.vk}
@@ -81,7 +81,7 @@ class CreateProfile extends Component {
             error={errors.vk}
           />
           <InputGroup
-            placeholder="Instagram Profile URL"
+            placeholder="Вставьте адрес вашего профайла в instagram"
             name="instagram"
             icon="fab fa-instagram"
             value={this.state.instagram}
@@ -93,9 +93,9 @@ class CreateProfile extends Component {
     }
 
     const options = [
-      { label: 'Select a gender', value: 0 },
-      { label: 'Male', value: 'Male' },
-      { label: 'Female', value: 'Female' }
+      { label: 'Выберите пол', value: 0 },
+      { label: 'Мужской', value: 'Мужской' },
+      { label: 'Женский', value: 'Женский' }
     ];
 
     return (
@@ -103,51 +103,50 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create your profile</h1>
+              <h1 className="display-4 text-center">Создайте свой профайл</h1>
               <p className="lead text-center">
-                Let's get some information to make your profile stand out
+                Позвольте нам узнать больше о вас
               </p>
-              <small className="d-block pb-3">* = required fields</small>
+              <small className="d-block pb-3">* = обязательные поля</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="* Profile Handle"
+                  placeholder="* Указатель на профайл"
                   name="handle"
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="A unique handle for your profile URL. Your full name, company name, nickname"
+                  info="Напишите уникальный указатель на ваш профайл, это может быть имя или прозвище"
                 />
                 <TextFieldGroup
-                  placeholder="Kazakhstan, Russia"
+                  placeholder="Казахстан, Россия"
                   name="country"
                   value={this.state.country}
                   onChange={this.onChange}
                   error={errors.country}
                 />
                 <TextFieldGroup
-                  placeholder="Almaty, Moscow"
+                  placeholder="Алматы, Урумчи"
                   name="city"
                   value={this.state.city}
                   onChange={this.onChange}
                   error={errors.city}
                 />
                 <TextFieldGroup
-                  placeholder="Kazakh Technological University, Moscow State University"
-                  name="education"
+                  placeholder="Казахский Национальный Университет"
                   value={this.state.education}
                   onChange={this.onChange}
                   error={errors.education}
                 />
                 <TextFieldGroup
-                  placeholder="Kazakh, Uyghur, Uzbek, Russian"
+                  placeholder="Казахский, Уйгурский, Узбекский, Русский"
                   name="languages"
                   value={this.state.languages}
                   onChange={this.onChange}
                   error={errors.languages}
-                  info="Please use comma separated values (e.g. Kazakh, Uzbek, Uyghur, Russian )"
+                  info="Пишите языки через запятую (e.g. Казахский, Узбекский, Уйгурский, Русский )"
                 />
                 <SelectListGroup
-                  placeholder="Male"
+                  placeholder="Мужской"
                   name="gender"
                   value={this.state.gender}
                   onChange={this.onChange}
@@ -155,7 +154,7 @@ class CreateProfile extends Component {
                   options={options}
                 />
                 <TextAreaFieldGroup
-                  placeholder="Short bio"
+                  placeholder="Короткая биография"
                   name="bio"
                   value={this.state.bio}
                   onChange={this.onChange}
@@ -171,14 +170,14 @@ class CreateProfile extends Component {
                     }}
                     className="btn btn-light"
                   >
-                    Add Social Network Links
+                    Добавьте ссылки на социальные сети
                   </button>
-                  <span className="text-muted">Optional</span>
+                  <span className="text-muted">Необязательно</span>
                 </div>
                 {socialInputs}
                 <input
                   type="submit"
-                  value="submit"
+                  value="Отправить"
                   className="btn btn-info btn-block mt-4"
                 />
               </form>

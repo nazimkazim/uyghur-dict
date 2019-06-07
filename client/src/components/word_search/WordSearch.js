@@ -46,7 +46,7 @@ class SearchWord extends Component {
                 className="form-control"
                 value={this.state.search}
                 onChange={this.updateSearch.bind(this)}
-                placeholder="Username"
+                placeholder="Найти слово"
                 aria-label="Username"
                 aria-describedby="addon-wrapping"
               />
