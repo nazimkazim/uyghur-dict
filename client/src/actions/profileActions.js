@@ -28,6 +28,7 @@ export const getCurrentProfile = () => dispatch => {
 };
 
 export const getLeaders = () => dispatch => {
+  dispatch(setProfileLoading());
   axios
     .get('/api/profile/all')
     .then(res => {
@@ -45,7 +46,6 @@ export const getLeaders = () => dispatch => {
 };
 
 export const getPublicProfileByID = id => dispatch => {
-  console.log(id);
   axios
     .get(`/api/profile/user/${id}`)
     .then(res => {

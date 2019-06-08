@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
-import { getCurrentProfile, getLeaders } from '../../actions/profileActions';
+import { getLeaders } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 
 class Leaders extends Component {
@@ -16,9 +16,8 @@ class Leaders extends Component {
 
   render() {
     const { leaders } = this.props;
-    const { loading } = this.props.profile;
     let showLeaders;
-    if (!leaders.users || loading) {
+    if (leaders.users == null) {
       showLeaders = <Spinner />;
     } else {
       showLeaders = leaders.users.map(leader => (
@@ -76,5 +75,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getLeaders, getCurrentProfile }
+  { getLeaders }
 )(withRouter(Leaders));

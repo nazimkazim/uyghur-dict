@@ -68,12 +68,10 @@ export const getWordByID = urlID => dispatch => {
     .get('/api/words')
     .then(res => {
       let word = res.data.filter(word => word._id === urlID);
-      //console.log(filteredData);
       dispatch({
         type: GET_WORD_BY_ID,
         payload: word
       });
-      //console.log(res.data);
     })
     .catch(err =>
       dispatch({

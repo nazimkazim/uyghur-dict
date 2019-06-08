@@ -1,5 +1,5 @@
-module.exports = {
-  mongoURI:
-    'mongodb://nzmai:frenchgrammar1@ds133256.mlab.com:33256/uyghur-dictionary',
-  secretOrKey: 'secret'
-};
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./keys_prod');
+} else {
+  module.exports = require('./keys_dev');
+}
