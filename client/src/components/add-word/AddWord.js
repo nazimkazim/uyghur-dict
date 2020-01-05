@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import TextFieldGroup from '../common/TextFieldGroup';
-import SelectListGroup from '../common/SelectListGroup';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { addWord } from '../../actions/wordActions';
+/* eslint-disable react/no-direct-mutation-state */
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import TextFieldGroup from "../common/TextFieldGroup";
+import SelectListGroup from "../common/SelectListGroup";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addWord } from "../../actions/wordActions";
 import {
   lexisOptions,
   grammarOptions,
@@ -12,24 +13,23 @@ import {
   styleOptions,
   originOptions,
   sphereOptions
-} from '../common/options';
+} from "../common/options";
 
 class AddWord extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ugrWordCyr: '',
-      ugrWordArb: '',
-      rusTranslation: '',
-      example: '',
-      exampleTranslation: '',
-      origin: '',
-      sphere: '',
-      see: '',
-      lexis: '',
-      grammar: '',
-      partOfSpeech: '',
-      style: '',
+      ugrWordCyr: "",
+      ugrWordArb: "",
+      rusTranslation: "",
+      examples: [{ exCyr: "", trRus: "", exLat: "", trEng: "", exArab: "" }],
+      origin: "",
+      sphere: "",
+      see: "",
+      lexis: "",
+      grammar: "",
+      partOfSpeech: "",
+      style: "",
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -51,8 +51,7 @@ class AddWord extends Component {
       ugrWordCyr: this.state.ugrWordCyr,
       ugrWordArb: this.state.ugrWordArb,
       rusTranslation: this.state.rusTranslation,
-      example: this.state.example,
-      exampleTranslation: this.state.exampleTranslation,
+      examples: this.state.examples,
       origin: this.state.origin,
       sphere: this.state.sphere,
       see: this.state.see,
@@ -62,11 +61,110 @@ class AddWord extends Component {
       style: this.state.style
     };
     this.props.addWord(wordData, this.props.history);
+    console.log(wordData);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  handleChange(i, e) {
+    const { name, value } = e.target;
+    let examples = [...this.state.examples];
+    examples[i] = { ...examples[i], [name]: value };
+    this.setState({ examples });
+  }
+
+  addClick() {
+    this.setState(prevState => ({
+      examples: [
+        ...prevState.examples,
+        { exCyr: "", trRus: "", exLat: "", trEng: "", exArab: "" }
+      ]
+    }));
+  }
+
+  createUI() {
+    return this.state.examples.map((el, i) => (
+      <div key={i}>
+        <TextFieldGroup
+          placeholder=""
+          info="Введите пример предложения на уйгурском (cyr)"
+          name="exCyr"
+          value={el.exCyr || ""}
+          className="exCyr"
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <TextFieldGroup
+          placeholder=""
+          info="Введите перевод примерного предложения на русском"
+          name="trRus"
+          value={el.trRus || ""}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <TextFieldGroup
+          placeholder=""
+          info="Введите пример предложения на уйгурском (lat)"
+          name="exLat"
+          value={el.exLat}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <TextFieldGroup
+          placeholder=""
+          info="Введите перевод примерного предложения на Английском"
+          name="trEng"
+          value={el.trEng}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <TextFieldGroup
+          placeholder=""
+          info="Введите перевод примерного предложения на арабском"
+          name="exArab"
+          value={el.exArab}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <input
+          type="button"
+          value="remove"
+          onClick={this.removeClick.bind(this, i)}
+        />
+        <hr />
+      </div>
+    ));
+  }
+
+  removeClick(i) {
+    let examples = [...this.state.examples];
+    examples.splice(i, 1);
+    this.setState({ examples });
+  }
+
+  /* onChangeExamples = e => {
+    //this.state.example[index].exCyr = e.target.value
+    if (
+      ["exCyr", "trRus", "exLat", "trEng", "exArab"].includes(
+        e.target.className
+      )
+    ) {
+      let example = [...this.state.example];
+      example[e.target.dataset.id][e.target.className] = e.target.value;
+      this.setState({ example }, () => console.log(this.state.example));
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
+  }; */
+
+  /* addTranslations(e) {
+    e.preventDefault();
+
+    
+    this.setState(prevState => ({
+      example: [
+        ...prevState.example,
+        { exCyr: "", trRus: "", exLat: "", trEng: "", exArab: "" }
+      ]
+    }));
+  } */
 
   onCheck(e) {
     this.setState({
@@ -125,21 +223,11 @@ class AddWord extends Component {
                   />
                   <label htmlFor="see">Смотри</label>
                 </div>
-                <TextFieldGroup
-                  placeholder=""
-                  info="Введите пример предложения на уйгурском"
-                  name="example"
-                  value={this.state.example}
-                  onChange={this.onChange}
-                  error={errors.example}
-                />
-                <TextFieldGroup
-                  placeholder=""
-                  info="Введите перевод примерного предложения на русском"
-                  name="exampleTranslation"
-                  value={this.state.exampleTranslation}
-                  onChange={this.onChange}
-                  error={errors.exampleTranslation}
+                <div className="input-group">{this.createUI()}</div>
+                <input
+                  type="button"
+                  value="add more"
+                  onClick={this.addClick.bind(this)}
                 />
                 <h6>Происхождение слова</h6>
                 <SelectListGroup
@@ -220,7 +308,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { addWord }
-)(withRouter(AddWord));
+export default connect(mapStateToProps, { addWord })(withRouter(AddWord));

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { getCurrentProfile } from '../../actions/profileActions';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Spinner from '../common/Spinner';
-import { Link } from 'react-router-dom';
-import ProfileActions from './ProfileActions';
+import React, { Component } from "react";
+import { getCurrentProfile } from "../../actions/profileActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Spinner from "../common/Spinner";
+import { Link } from "react-router-dom";
+import ProfileActions from "./ProfileActions";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -33,12 +33,13 @@ class Dashboard extends Component {
         // User is logged in but has no profile
         dashboardContent = (
           <div>
-            <p className="lead text-muted">Добро пожаловать {user.name}</p>
+            <p className="lead text-muted">Welcome {user.name}</p>
             <p className="lead text-muted">
-              У вас еще нет профайла, пожалуйста напишите что-нибудь о себе
+              You don't have profile yet, please tell us something about
+              yourself
             </p>
             <Link to="/create-profile" className="btn btn-lg btn-info">
-              Создайте профайл
+              Create profile
             </Link>
           </div>
         );
@@ -48,7 +49,7 @@ class Dashboard extends Component {
       <div className="dashboard">
         <div className="row">
           <div className="col-md-12">
-            <h1 className="display-4">Панель управления</h1>
+            <h1 className="display-4">Dashboard</h1>
             {dashboardContent}
           </div>
         </div>
@@ -68,7 +69,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { getCurrentProfile }
-)(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);

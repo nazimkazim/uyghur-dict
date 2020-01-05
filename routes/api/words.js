@@ -37,8 +37,6 @@ router.post(
           ugrWordCyr: req.body.ugrWordCyr,
           ugrWordArb: req.body.ugrWordArb,
           rusTranslation: req.body.rusTranslation,
-          example: req.body.example,
-          exampleTranslation: req.body.exampleTranslation,
           origin: req.body.origin,
           sphere: req.body.sphere,
           lexis: req.body.lexis,
@@ -46,6 +44,13 @@ router.post(
           partOfSpeech: req.body.partOfSpeech,
           style: req.body.style
         });
+        // Social
+        newWord.examples = [];
+        if (req.body.exCyr) newWord.examples.exCyr = req.body.exCyr;
+        if (req.body.trRus) newWord.examples.trRus = req.body.trRus;
+        if (req.body.exLat) newWord.examples.exLat = req.body.exLat;
+        if (req.body.trEng) newWord.examples.trEng = req.body.trEng;
+        if (req.body.exArab) newWord.examples.exArab = req.body.exArab;
         newWord.save().then(word => {
           //now update user model
           User.findOne({ _id: req.user.id })

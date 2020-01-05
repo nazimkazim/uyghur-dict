@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import Spinner from '../common/Spinner';
-import { getPublicProfileByID } from '../../actions/profileActions';
-import { Link } from 'react-router-dom';
-import usersReducer from '../../reducers/usersReducer';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import Spinner from "../common/Spinner";
+import { getPublicProfileByID } from "../../actions/profileActions";
+//import { Link } from "react-router-dom";
+//import usersReducer from "../../reducers/usersReducer";
 
 class PublicProfile extends Component {
   componentDidMount() {
@@ -41,21 +41,21 @@ class PublicProfile extends Component {
                 <div className="row">
                   <div className="col">
                     {user.social ? (
-                      <a href={user.social.facebook} target="_blank">
+                      <a href={user.social.facebook}>
                         <i className="fab fa-facebook" />
                       </a>
                     ) : null}
                   </div>
                   <div className="col">
                     {user.social ? (
-                      <a href={user.social.vk} target="_blank">
+                      <a href={user.social.vk}>
                         <i className="fab fa-vk" />
                       </a>
                     ) : null}
                   </div>
                   <div className="col">
                     {user.social ? (
-                      <a href={user.social.instagram} target="_blank">
+                      <a href={user.social.instagram}>
                         <i className="fab fa-instagram" />
                       </a>
                     ) : null}
@@ -63,22 +63,22 @@ class PublicProfile extends Component {
                 </div>
               </li>
               {user.country ? (
-                <li className="list-group-item">Страна: {user.country}</li>
+                <li className="list-group-item">Country: {user.country}</li>
               ) : null}
               {user.city ? (
-                <li className="list-group-item">Город: {user.city}</li>
+                <li className="list-group-item">City: {user.city}</li>
               ) : null}
               {user.gender ? (
-                <li className="list-group-item">Пол: {user.gender}</li>
+                <li className="list-group-item">Gender: {user.gender}</li>
               ) : null}
               {user.education ? (
                 <li className="list-group-item">
-                  Образование: {user.education}
+                  Education: {user.education}
                 </li>
               ) : null}
               {user.languages ? (
                 <li className="list-group-item">
-                  Языки:{' '}
+                  Languages:{" "}
                   {user.languages.map(language => (
                     <span key={language}>{language}</span>
                   ))}
@@ -108,7 +108,6 @@ const mapStateToProps = state => ({
   user: state.users
 });
 
-export default connect(
-  mapStateToProps,
-  { getPublicProfileByID }
-)(PublicProfile);
+export default connect(mapStateToProps, { getPublicProfileByID })(
+  PublicProfile
+);

@@ -51,9 +51,9 @@ class Login extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Войти</h1>
+              <h1 className="display-4 text-center">Login</h1>
               <p className="lead text-center">
-                Войдите в словарь используя свой пароль
+                Log into the dictionary using your password and email
               </p>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -66,7 +66,7 @@ class Login extends Component {
                 />
 
                 <TextFieldGroup
-                  placeholder="Пароль"
+                  placeholder="Password"
                   name="password"
                   type="password"
                   value={this.state.password}
@@ -74,7 +74,7 @@ class Login extends Component {
                   error={errors.password}
                 />
 
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input type="submit" value="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
           </div>

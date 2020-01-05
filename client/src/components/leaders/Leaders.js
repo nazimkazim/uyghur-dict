@@ -1,15 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
-import { getLeaders } from '../../actions/profileActions';
-import Spinner from '../common/Spinner';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Link, withRouter } from "react-router-dom";
+import { getLeaders } from "../../actions/profileActions";
+import Spinner from "../common/Spinner";
 
 class Leaders extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.getLeaders();
   }
@@ -28,22 +24,22 @@ class Leaders extends Component {
                 src={
                   leader.user
                     ? leader.user.avatar
-                    : 'https://via.placeholder.com/150'
+                    : "https://via.placeholder.com/150"
                 }
                 className="figure-img img-fluid rounded"
-                style={{ width: '50%' }}
-                alt={leader.user ? leader.user.avatar : 'нет фотографии'}
+                style={{ width: "50%" }}
+                alt={leader.user ? leader.user.avatar : "no photo"}
               />
               <figcaption>
                 <Link to={`/leaders/${leader._id}`}>
                   {leader.user
                     ? leader.user.name
-                    : 'Пользователь возможно удален'}
+                    : "User may not exist"}
                 </Link>
               </figcaption>
             </figure>
             <span>
-              Добавил(а) {leader.user ? leader.user.score / 150 : 0} слов
+              Added {leader.user ? leader.user.score / 150 : 0} words
             </span>
             <span className="badge badge-primary badge-pill">
               {leader.user ? leader.user.score : 0}
@@ -56,7 +52,7 @@ class Leaders extends Component {
     return (
       <div className="row d-flex justify-content-center">
         <div className="col-md-8">
-          <h3 className="text-center">Лидеры</h3>
+          <h3 className="text-center">Leaders</h3>
           <div className="list-group">{showLeaders}</div>
         </div>
       </div>
@@ -73,7 +69,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(
-  mapStateToProps,
-  { getLeaders }
-)(withRouter(Leaders));
+export default connect(mapStateToProps, { getLeaders })(withRouter(Leaders));

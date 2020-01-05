@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const wordSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: "users"
   },
   date: {
     type: Date,
@@ -21,12 +21,15 @@ const wordSchema = new Schema({
     type: String,
     required: true
   },
-  example: {
-    type: String
-  },
-  exampleTranslation: {
-    type: String
-  },
+  examples: [
+    {
+      exCyr: { type: String },
+      trRus: { type: String },
+      exLat: { type: String },
+      trEng: { type: String },
+      exArab: { type: String }
+    }
+  ],
   origin: {
     type: String
   },
@@ -51,4 +54,4 @@ const wordSchema = new Schema({
   }
 });
 
-module.exports = Word = mongoose.model('words', wordSchema);
+module.exports = Word = mongoose.model("words", wordSchema);
