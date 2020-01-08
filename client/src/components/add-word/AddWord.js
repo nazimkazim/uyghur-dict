@@ -139,32 +139,7 @@ class AddWord extends Component {
     this.setState({ examples });
   }
 
-  /* onChangeExamples = e => {
-    //this.state.example[index].exCyr = e.target.value
-    if (
-      ["exCyr", "trRus", "exLat", "trEng", "exArab"].includes(
-        e.target.className
-      )
-    ) {
-      let example = [...this.state.example];
-      example[e.target.dataset.id][e.target.className] = e.target.value;
-      this.setState({ example }, () => console.log(this.state.example));
-    } else {
-      this.setState({ [e.target.name]: e.target.value });
-    }
-  }; */
-
-  /* addTranslations(e) {
-    e.preventDefault();
-
-    
-    this.setState(prevState => ({
-      example: [
-        ...prevState.example,
-        { exCyr: "", trRus: "", exLat: "", trEng: "", exArab: "" }
-      ]
-    }));
-  } */
+  
 
   onCheck(e) {
     this.setState({

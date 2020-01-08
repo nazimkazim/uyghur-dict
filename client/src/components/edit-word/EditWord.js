@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
-import TextFieldGroup from '../common/TextFieldGroup';
-import SelectListGroup from '../common/SelectListGroup';
-import { getWordByID, updateWord } from '../../actions/wordActions';
-import isEmpty from '../../validation/is-empty';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Link, withRouter } from "react-router-dom";
+import TextFieldGroup from "../common/TextFieldGroup";
+import SelectListGroup from "../common/SelectListGroup";
+import { getWordByID, updateWord } from "../../actions/wordActions";
+import isEmpty from "../../validation/is-empty";
 import {
   lexisOptions,
   grammarOptions,
@@ -13,23 +13,22 @@ import {
   styleOptions,
   originOptions,
   sphereOptions
-} from '../common/options';
+} from "../common/options";
 
 class EditWord extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ugrWordArb: '',
-      rusTranslation: '',
-      example: '',
-      exampleTranslation: '',
-      origin: '',
-      sphere: '',
-      see: '',
-      lexis: '',
-      grammar: '',
-      partOfSpeech: '',
-      style: '',
+      ugrWordArb: "",
+      rusTranslation: "",
+      examples: [{ exCyr: "", trRus: "", exLat: "", trEng: "", exArab: "" }],
+      origin: "",
+      sphere: "",
+      see: "",
+      lexis: "",
+      grammar: "",
+      partOfSpeech: "",
+      style: "",
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -44,30 +43,33 @@ class EditWord extends Component {
 
     if (nextProps.words.word[0]) {
       nextProps.words.word.map(word => {
-        word.ugrWordCyr = !isEmpty(word.ugrWordCyr) ? word.ugrWordCyr : '';
+        word.ugrWordCyr = !isEmpty(word.ugrWordCyr) ? word.ugrWordCyr : "";
         word.rusTranslation = !isEmpty(word.rusTranslation)
           ? word.rusTranslation
-          : '';
+          : "";
         word.rusTranslation = !isEmpty(word.rusTranslation)
           ? word.rusTranslation
-          : '';
-        word.example = !isEmpty(word.example) ? word.example : '';
-        word.exampleTranslation = !isEmpty(word.exampleTranslation)
-          ? word.exampleTranslation
-          : '';
-        word.origin = !isEmpty(word.origin) ? word.origin : '';
-        word.sphere = !isEmpty(word.sphere) ? word.sphere : '';
+          : "";
+        word.examples.map(word => {
+          word.exCyr = !isEmpty(word.exCyr) ? word.exCyr : "";
+          word.trRus = !isEmpty(word.trRus) ? word.trRus : "";
+          word.exLat = !isEmpty(word.exLat) ? word.exLat : "";
+          word.trEng = !isEmpty(word.trEng) ? word.trEng : "";
+          word.trEng = !isEmpty(word.trEng) ? word.trEng : "";
+          //return true
+        });
+        word.origin = !isEmpty(word.origin) ? word.origin : "";
+        word.sphere = !isEmpty(word.sphere) ? word.sphere : "";
         word.see = !isEmpty(word.see) ? word.see : false;
-        word.lexis = !isEmpty(word.lexis) ? word.lexis : '';
-        word.grammar = !isEmpty(word.grammar) ? word.grammar : '';
-        word.style = !isEmpty(word.style) ? word.style : '';
+        word.lexis = !isEmpty(word.lexis) ? word.lexis : "";
+        word.grammar = !isEmpty(word.grammar) ? word.grammar : "";
+        word.style = !isEmpty(word.style) ? word.style : "";
 
         this.setState({
           ugrWordCyr: word.ugrWordCyr,
           ugrWordArb: word.ugrWordArb,
           rusTranslation: word.rusTranslation,
-          example: word.example,
-          exampleTranslation: word.exampleTranslation,
+          examples: word.examples,
           origin: word.origin,
           sphere: word.sphere,
           style: word.style,
@@ -76,6 +78,7 @@ class EditWord extends Component {
           see: word.see,
           partOfSpeech: word.partOfSpeech
         });
+        return true;
       });
     }
   }
@@ -90,8 +93,7 @@ class EditWord extends Component {
       ugrWordCyr: this.state.ugrWordCyr,
       ugrWordArb: this.state.ugrWordArb,
       rusTranslation: this.state.rusTranslation,
-      example: this.state.example,
-      exampleTranslation: this.state.exampleTranslation,
+      examples: this.state.examples,
       origin: this.state.origin,
       sphere: this.state.sphere,
       see: this.state.see,
@@ -114,6 +116,78 @@ class EditWord extends Component {
       current: !this.state.current
     });
   }
+
+  handleChange(i, e) {
+    const { name, value } = e.target;
+    let examples = [...this.state.examples];
+    examples[i] = { ...examples[i], [name]: value };
+    this.setState({ examples });
+  }
+
+  addClick() {
+    this.setState(prevState => ({
+      examples: [
+        ...prevState.examples,
+        { exCyr: "", trRus: "", exLat: "", trEng: "", exArab: "" }
+      ]
+    }));
+  }
+
+  createUI() {
+    return this.state.examples.map((el, i) => (
+      <div key={i}>
+        <TextFieldGroup
+          placeholder=""
+          info="Введите пример предложения на уйгурском (cyr)"
+          name="exCyr"
+          value={el.exCyr || ""}
+          className="exCyr"
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <TextFieldGroup
+          placeholder=""
+          info="Введите перевод примерного предложения на русском"
+          name="trRus"
+          value={el.trRus || ""}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <TextFieldGroup
+          placeholder=""
+          info="Введите пример предложения на уйгурском (lat)"
+          name="exLat"
+          value={el.exLat}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <TextFieldGroup
+          placeholder=""
+          info="Введите перевод примерного предложения на Английском"
+          name="trEng"
+          value={el.trEng}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <TextFieldGroup
+          placeholder=""
+          info="Введите перевод примерного предложения на арабском"
+          name="exArab"
+          value={el.exArab}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <input
+          type="button"
+          value="remove"
+          onClick={this.removeClick.bind(this, i)}
+        />
+        <hr />
+      </div>
+    ));
+  }
+
+  removeClick(i) {
+    let examples = [...this.state.examples];
+    examples.splice(i, 1);
+    this.setState({ examples });
+  }
+
   render() {
     const { errors } = this.state;
 
@@ -162,21 +236,11 @@ class EditWord extends Component {
                   />
                   <label htmlFor="see">Смотри</label>
                 </div>
-                <TextFieldGroup
-                  placeholder=""
-                  info="Введите пример предложения на уйгурском"
-                  name="example"
-                  value={this.state.example}
-                  onChange={this.onChange}
-                  error={errors.example}
-                />
-                <TextFieldGroup
-                  placeholder=""
-                  info="Введите перевод примерного предложения на русском"
-                  name="exampleTranslation"
-                  value={this.state.exampleTranslation}
-                  onChange={this.onChange}
-                  error={errors.exampleTranslation}
+                <div className="input-group">{this.createUI()}</div>
+                <input
+                  type="button"
+                  value="add more"
+                  onClick={this.addClick.bind(this)}
                 />
                 <h6>Происхождение слова</h6>
                 <SelectListGroup
@@ -257,7 +321,6 @@ const mapStateToProps = state => ({
   words: state.words
 });
 
-export default connect(
-  mapStateToProps,
-  { getWordByID, updateWord }
-)(withRouter(EditWord));
+export default connect(mapStateToProps, { getWordByID, updateWord })(
+  withRouter(EditWord)
+);
