@@ -1,16 +1,16 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Word = require('../../models/Word');
-const User = require('../../models/User');
-const validateWordInput = require('../../validation/word');
-const passport = require('passport');
+const Word = require("../../models/Word");
+const User = require("../../models/User");
+const validateWordInput = require("../../validation/word");
+const passport = require("passport");
 
 // @route  POST api/words
 // @desc   Add words to profile
 // @access Private
 router.post(
-  '/',
-  passport.authenticate('jwt', { session: false }),
+  "/",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateWordInput(req.body);
 
@@ -30,7 +30,7 @@ router.post(
       ) {
         return res
           .status(404)
-          .json({ wordalreadyexists: 'Word already exists' });
+          .json({ wordalreadyexists: "Word already exists" });
       } else {
         const newWord = new Word({
           user: req.user.id,
@@ -42,17 +42,12 @@ router.post(
           lexis: req.body.lexis,
           grammar: req.body.grammar,
           partOfSpeech: req.body.partOfSpeech,
-          style: req.body.style
+          style: req.body.style,
+          examples: req.body.examples
         });
-        // Social
-        newWord.examples = [];
-        if (req.body.exCyr) newWord.examples.exCyr = req.body.exCyr;
-        if (req.body.trRus) newWord.examples.trRus = req.body.trRus;
-        if (req.body.exLat) newWord.examples.exLat = req.body.exLat;
-        if (req.body.trEng) newWord.examples.trEng = req.body.trEng;
-        if (req.body.exArab) newWord.examples.exArab = req.body.exArab;
+        
+
         newWord.save().then(word => {
-          //now update user model
           User.findOne({ _id: req.user.id })
             .then(foundUser => {
               foundUser.score = foundUser.score + 150;
@@ -62,11 +57,11 @@ router.post(
                   res.json({ word, savedUser });
                 })
                 .catch(err => {
-                  return res.status(400).json({ error: 'could not add score' });
+                  return res.status(400).json({ error: "could not add score" });
                 });
             })
             .catch(err => {
-              return res.status(400).json({ error: 'could not find user' });
+              return res.status(400).json({ error: "could not find user" });
             });
         });
       }
@@ -78,8 +73,8 @@ router.post(
 // @desc   Update a word by id
 // @access Private
 router.put(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateWordInput(req.body);
 
@@ -93,7 +88,7 @@ router.put(
       Word.findById(req.params.id).then(word => {
         // Check for word owner
         if (word.user.toString() !== req.user.id) {
-          return res.status(401).json({ notauthorized: 'User not authorized' });
+          return res.status(401).json({ notauthorized: "User not authorized" });
         }
 
         const wordID = req.params.id;
@@ -116,7 +111,7 @@ router.put(
           .catch(err =>
             res
               .status(404)
-              .json({ wordcannotbeupdated: 'word cannot be updated' })
+              .json({ wordcannotbeupdated: "word cannot be updated" })
           );
       });
     });
@@ -126,32 +121,32 @@ router.put(
 // @route  GET api/words/leaders
 // @desc   Display leaders that contributed most to the project
 // @access Public
-router.get('/leaders', (req, res) => {
+router.get("/leaders", (req, res) => {
   User.find({})
     .sort({ score: -1 })
-    .populate('profile', ['handle'])
+    .populate("profile", ["handle"])
     .then(users => res.json(users))
-    .catch(err => res.status(404).json({ nonusersfound: 'No users found' }));
+    .catch(err => res.status(404).json({ nonusersfound: "No users found" }));
 });
 
 // @route  GET api/words
 // @desc   Dislpay all words
 // @access Public
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   Word.find({})
     .sort({ date: -1 })
     .then(words => res.json(words))
-    .catch(err => res.status(404).json({ nonwordsfound: 'No words found' }));
+    .catch(err => res.status(404).json({ nonwordsfound: "No words found" }));
 });
 
 //@route  Get api/words/:id
 //@desc   Get word by id
 //@access Public
-router.get('/:id', (req, res) => {
+router.get("/:id", (req, res) => {
   Word.findById(req.params.id)
     .then(word => res.json(word))
     .catch(err =>
-      res.status(404).json({ nonwordfound: 'No word found with that ID' })
+      res.status(404).json({ nonwordfound: "No word found with that ID" })
     );
 });
 
@@ -160,8 +155,8 @@ router.get('/:id', (req, res) => {
 //@access Private
 
 router.delete(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
       Word.findById(req.params.id)
@@ -170,7 +165,7 @@ router.delete(
           if (word.user.toString() !== req.user.id) {
             return res
               .status(401)
-              .json({ notauthorized: 'User not authorized' });
+              .json({ notauthorized: "User not authorized" });
           }
 
           // Delete
@@ -188,15 +183,15 @@ router.delete(
                   .catch(err => {
                     return res
                       .status(400)
-                      .json({ error: 'could not add score' });
+                      .json({ error: "could not add score" });
                   });
               })
               .catch(err => {
-                return res.status(400).json({ error: 'could not find user' });
+                return res.status(400).json({ error: "could not find user" });
               });
           });
         })
-        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+        .catch(err => res.status(404).json({ postnotfound: "No post found" }));
     });
   }
 );
