@@ -20,7 +20,10 @@ class EditWord extends Component {
     super(props);
     this.state = {
       ugrWordArb: "",
+      ugrWordCyr: "",
+      ugrWordLat: "",
       rusTranslation: "",
+      engTranslation: "",
       examples: [{ exCyr: "", trRus: "", exLat: "", trEng: "", exArab: "" }],
       origin: "",
       sphere: "",
@@ -44,11 +47,13 @@ class EditWord extends Component {
     if (nextProps.words.word[0]) {
       nextProps.words.word.map(word => {
         word.ugrWordCyr = !isEmpty(word.ugrWordCyr) ? word.ugrWordCyr : "";
+        word.ugrWordArb = !isEmpty(word.ugrWordArb) ? word.ugrWordArb : "";
+        word.ugrWordLat = !isEmpty(word.ugrWordCyr) ? word.ugrWordLat : "";
         word.rusTranslation = !isEmpty(word.rusTranslation)
           ? word.rusTranslation
           : "";
-        word.rusTranslation = !isEmpty(word.rusTranslation)
-          ? word.rusTranslation
+        word.engTranslation = !isEmpty(word.engTranslation)
+          ? word.engTranslation
           : "";
         word.examples.map(word => {
           word.exCyr = !isEmpty(word.exCyr) ? word.exCyr : "";
@@ -56,7 +61,7 @@ class EditWord extends Component {
           word.exLat = !isEmpty(word.exLat) ? word.exLat : "";
           word.trEng = !isEmpty(word.trEng) ? word.trEng : "";
           word.trEng = !isEmpty(word.trEng) ? word.trEng : "";
-          //return true
+          return true;
         });
         word.origin = !isEmpty(word.origin) ? word.origin : "";
         word.sphere = !isEmpty(word.sphere) ? word.sphere : "";
@@ -68,7 +73,9 @@ class EditWord extends Component {
         this.setState({
           ugrWordCyr: word.ugrWordCyr,
           ugrWordArb: word.ugrWordArb,
+          ugrWordLat: word.ugrWordLat,
           rusTranslation: word.rusTranslation,
+          engTranslation: word.engTranslation,
           examples: word.examples,
           origin: word.origin,
           sphere: word.sphere,
@@ -92,7 +99,9 @@ class EditWord extends Component {
     const wordData = {
       ugrWordCyr: this.state.ugrWordCyr,
       ugrWordArb: this.state.ugrWordArb,
+      ugrWordLat: this.state.ugrWordLat,
       rusTranslation: this.state.rusTranslation,
+      engTranslation: this.state.engTranslation,
       examples: this.state.examples,
       origin: this.state.origin,
       sphere: this.state.sphere,
@@ -218,12 +227,28 @@ class EditWord extends Component {
                   error={errors.ugrWordArb}
                 />
                 <TextFieldGroup
+                  placeholder="جاراڭ - جۇرۇڭ"
+                  info="Введите слово на уйгурском (латинским шрифтом)"
+                  name="ugrWordLat"
+                  value={this.state.ugrWordLat}
+                  onChange={this.onChange}
+                  error={errors.ugrWordLat}
+                />
+                <TextFieldGroup
                   placeholder="Ребенок"
                   info="Введите слово на русском"
                   name="rusTranslation"
                   value={this.state.rusTranslation}
                   onChange={this.onChange}
                   error={errors.rusTranslation}
+                />
+                <TextFieldGroup
+                  placeholder="Ребенок"
+                  info="Введите слово на английском"
+                  name="engTranslation"
+                  value={this.state.engTranslation}
+                  onChange={this.onChange}
+                  error={errors.engTranslation}
                 />
                 <div className="form-check mb-form">
                   <input

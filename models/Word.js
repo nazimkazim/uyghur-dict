@@ -14,10 +14,18 @@ const wordSchema = new Schema({
     type: String,
     required: true
   },
+  ugrWordLat: {
+    type: String,
+    required: true
+  },
   ugrWordArb: {
     type: String
   },
   rusTranslation: {
+    type: String,
+    required: true
+  },
+  engTranslation: {
     type: String,
     required: true
   },

@@ -72,13 +72,14 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
+                <a
                   className="nav-link"
                   href="https://www.lexilogos.com/keyboard/uyghur.htm"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Convert from Latin to Arabic script
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/leaders">

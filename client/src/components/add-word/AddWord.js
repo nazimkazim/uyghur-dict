@@ -21,7 +21,9 @@ class AddWord extends Component {
     this.state = {
       ugrWordCyr: "",
       ugrWordArb: "",
+      ugrWordLat: "",
       rusTranslation: "",
+      engTranslation: "",
       examples: [{ exCyr: "", trRus: "", exLat: "", trEng: "", exArab: "" }],
       origin: "",
       sphere: "",
@@ -50,7 +52,9 @@ class AddWord extends Component {
     const wordData = {
       ugrWordCyr: this.state.ugrWordCyr,
       ugrWordArb: this.state.ugrWordArb,
+      ugrWordLat: this.state.ugrWordLat,
       rusTranslation: this.state.rusTranslation,
+      engTranslation: this.state.engTranslation,
       examples: this.state.examples,
       origin: this.state.origin,
       sphere: this.state.sphere,
@@ -139,8 +143,6 @@ class AddWord extends Component {
     this.setState({ examples });
   }
 
-  
-
   onCheck(e) {
     this.setState({
       current: !this.state.current
@@ -177,7 +179,15 @@ class AddWord extends Component {
                   name="ugrWordArb"
                   value={this.state.ugrWordArb}
                   onChange={this.onChange}
-                  error={errors.ugrWordCyr}
+                  error={errors.ugrWordArb}
+                />
+                <TextFieldGroup
+                  placeholder="جاراڭ - جۇرۇڭ"
+                  info="Введите слово на уйгурском (латинским шрифтом)"
+                  name="ugrWordLat"
+                  value={this.state.ugrWordLat}
+                  onChange={this.onChange}
+                  error={errors.ugrWordLat}
                 />
                 <TextFieldGroup
                   placeholder="Ребенок"
@@ -186,6 +196,14 @@ class AddWord extends Component {
                   value={this.state.rusTranslation}
                   onChange={this.onChange}
                   error={errors.rusTranslation}
+                />
+                <TextFieldGroup
+                  placeholder="Ребенок"
+                  info="Введите слово на английском"
+                  name="engTranslation"
+                  value={this.state.engTranslation}
+                  onChange={this.onChange}
+                  error={errors.engTranslation}
                 />
                 <div className="form-check mb-form">
                   <input

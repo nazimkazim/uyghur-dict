@@ -35,8 +35,10 @@ router.post(
         const newWord = new Word({
           user: req.user.id,
           ugrWordCyr: req.body.ugrWordCyr,
+          ugrWordLat: req.body.ugrWordLat,
           ugrWordArb: req.body.ugrWordArb,
           rusTranslation: req.body.rusTranslation,
+          engTranslation: req.body.engTranslation,
           origin: req.body.origin,
           sphere: req.body.sphere,
           lexis: req.body.lexis,
