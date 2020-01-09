@@ -92,37 +92,37 @@ class AddWord extends Component {
     return this.state.examples.map((el, i) => (
       <div key={i}>
         <TextFieldGroup
-          placeholder=""
-          info="Введите пример предложения на уйгурском (cyr)"
+          placeholder="Уйғур"
+          info="type example sentence with cyrillic writing"
           name="exCyr"
           value={el.exCyr || ""}
           className="exCyr"
           onChange={this.handleChange.bind(this, i)}
         />
         <TextFieldGroup
-          placeholder=""
-          info="Введите перевод примерного предложения на русском"
+          placeholder="Уйгур"
+          info="type translation of example sentence in Russian"
           name="trRus"
           value={el.trRus || ""}
           onChange={this.handleChange.bind(this, i)}
         />
         <TextFieldGroup
-          placeholder=""
-          info="Введите пример предложения на уйгурском (lat)"
+          placeholder="Uyghur"
+          info="type example sentence with latin"
           name="exLat"
           value={el.exLat}
           onChange={this.handleChange.bind(this, i)}
         />
         <TextFieldGroup
-          placeholder=""
-          info="Введите перевод примерного предложения на Английском"
+          placeholder="Uygur"
+          info="type translation of example sentence in English"
           name="trEng"
           value={el.trEng}
           onChange={this.handleChange.bind(this, i)}
         />
         <TextFieldGroup
-          placeholder=""
-          info="Введите перевод примерного предложения на арабском"
+          placeholder="ئۇيغۇر"
+          info="type example sentence with arabic writing"
           name="exArab"
           value={el.exArab}
           onChange={this.handleChange.bind(this, i)}
@@ -130,6 +130,7 @@ class AddWord extends Component {
         <input
           type="button"
           value="remove"
+          className="btn btn-info btn-block mt-4"
           onClick={this.removeClick.bind(this, i)}
         />
         <hr />
@@ -167,23 +168,23 @@ class AddWord extends Component {
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Бала"
-                  info="Введите слово на уйгурском"
+                  info="type word in uyghur (cyrillic)"
                   name="ugrWordCyr"
                   value={this.state.ugrWordCyr}
                   onChange={this.onChange}
                   error={errors.ugrWordCyr}
                 />
                 <TextFieldGroup
-                  placeholder="جاراڭ - جۇرۇڭ"
-                  info="Введите слово на уйгурском (арабским шрифтом)"
+                  placeholder="بالا"
+                  info="type word in uyghur (arabic)"
                   name="ugrWordArb"
                   value={this.state.ugrWordArb}
                   onChange={this.onChange}
                   error={errors.ugrWordArb}
                 />
                 <TextFieldGroup
-                  placeholder="جاراڭ - جۇرۇڭ"
-                  info="Введите слово на уйгурском (латинским шрифтом)"
+                  placeholder="bala"
+                  info="type word in latin (latin)"
                   name="ugrWordLat"
                   value={this.state.ugrWordLat}
                   onChange={this.onChange}
@@ -191,15 +192,15 @@ class AddWord extends Component {
                 />
                 <TextFieldGroup
                   placeholder="Ребенок"
-                  info="Введите слово на русском"
+                  info="type translation in Russian"
                   name="rusTranslation"
                   value={this.state.rusTranslation}
                   onChange={this.onChange}
                   error={errors.rusTranslation}
                 />
                 <TextFieldGroup
-                  placeholder="Ребенок"
-                  info="Введите слово на английском"
+                  placeholder="Child"
+                  info="type translation in English"
                   name="engTranslation"
                   value={this.state.engTranslation}
                   onChange={this.onChange}
@@ -214,33 +215,34 @@ class AddWord extends Component {
                     onChange={this.onCheck}
                     id="see"
                   />
-                  <label htmlFor="see">Смотри</label>
+                  <label htmlFor="see">See</label>
                 </div>
-                <div className="input-group">{this.createUI()}</div>
+                <div>{this.createUI()}</div>
                 <input
                   type="button"
                   value="add more"
+                  className="btn btn-info btn-block mt-4"
                   onClick={this.addClick.bind(this)}
                 />
-                <h6>Происхождение слова</h6>
+                <h6>Origin</h6>
                 <SelectListGroup
-                  placeholder="Арабское"
+                  placeholder="Arabic"
                   name="origin"
                   value={this.state.origin}
                   onChange={this.onChange}
                   error={errors.origin}
                   options={originOptions}
                 />
-                <h6>Сфера употребления слова</h6>
+                <h6>Sphere</h6>
                 <SelectListGroup
-                  placeholder="Физика"
+                  placeholder="Physics"
                   name="sphere"
                   value={this.state.sphere}
                   onChange={this.onChange}
                   error={errors.sphere}
                   options={sphereOptions}
                 />
-                <h6>Лексика слова</h6>
+                <h6>Lexis</h6>
                 <SelectListGroup
                   placeholder=""
                   name="lexis"
@@ -249,7 +251,7 @@ class AddWord extends Component {
                   error={errors.lexis}
                   options={lexisOptions}
                 />
-                <h6>Стиль слова</h6>
+                <h6>Style</h6>
                 <SelectListGroup
                   placeholder=""
                   name="style"
@@ -258,7 +260,7 @@ class AddWord extends Component {
                   error={errors.style}
                   options={styleOptions}
                 />
-                <h6>Часть речи</h6>
+                <h6>Part of speech</h6>
                 <SelectListGroup
                   placeholder=""
                   name="partOfSpeech"
@@ -267,7 +269,7 @@ class AddWord extends Component {
                   error={errors.partOfSpeech}
                   options={partOfSpeechOptions}
                 />
-                <h6>Грамматика слова</h6>
+                <h6>Grammar</h6>
                 <SelectListGroup
                   placeholder=""
                   name="grammar"

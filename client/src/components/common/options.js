@@ -1,169 +1,172 @@
 export const sphereOptions = [
-  { label: 'Выберите сферу употребления слова', value: 0 },
-  { label: 'Анатомия', value: 'Анатомия' },
-  { label: 'Археология', value: 'Археология' },
-  { label: 'Архитектура', value: 'Архитектура' },
-  { label: 'Астрономия', value: 'Астрономия' },
-  { label: 'Биология', value: 'Биология' },
-  { label: 'Ботаника', value: 'Ботаника' },
-  { label: 'Бухгалтерия', value: 'Бухгалтерия' },
-  { label: 'Ветеренария', value: 'Ветеренария' },
-  { label: 'География', value: 'География' },
-  { label: 'Диалектизм', value: 'Диалектизм' },
-  { label: 'Дипломатический термин', value: 'Дипломатический термин' },
-  { label: 'Железнодорожное дело', value: 'Железнодорожное дело' },
-  { label: 'Зоология', value: 'Зоология' },
-  { label: 'Исторический термин', value: 'Исторический термин' },
-  { label: 'Кулинария', value: 'Кулинария' },
-  { label: 'Лингвистика', value: 'Лингвистика' },
-  { label: 'Математика', value: 'Математика' },
-  { label: 'Медицина', value: 'Медицина' },
-  { label: 'Религия', value: 'Религия' },
-  { label: 'Физкультура и спорт', value: 'Физкультура и спорт' },
-  { label: 'Сельзкое хозяйство', value: 'Сельзкое хозяйство' },
-  { label: 'Фармацептический термин', value: 'Фармацептический термин' },
-  { label: 'Физика', value: 'Физика' },
-  { label: 'Физиология', value: 'Физиология' },
-  { label: 'Фольклор', value: 'Фольклор' },
-  { label: 'Химия', value: 'Химия' },
-  { label: 'Экономика', value: 'Экономика' },
-  { label: 'Этнография', value: 'Этнография' },
-  { label: 'Юридический термин', value: 'Юридический термин' }
+  { label: "Choose a sphere where word is used", value: 0 },
+  { label: "Anatomy", value: "Anatomy" },
+  { label: "Archeology", value: "Archeology" },
+  { label: "Architecture", value: "Architecture" },
+  { label: "Astronomy", value: "Astronomy" },
+  { label: "Biology", value: "Biology" },
+  { label: "Botanics", value: "Botanics" },
+  { label: "Accounting", value: "Accounting" },
+  { label: "Ветеренария", value: "Ветеренария" },
+  { label: "Geography", value: "Geography" },
+  { label: "Dialecticism", value: "Dialecticism" },
+  { label: "term used in diplomacy", value: "term used in diplomacy" },
+  { label: "Railways", value: "Railways" },
+  { label: "Zoology", value: "Zoology" },
+  { label: "Historical term", value: "Historical term" },
+  { label: "Cookery", value: "Cookery" },
+  { label: "Linguistics", value: "Linguistics" },
+  { label: "Mathmatics", value: "Mathmatics" },
+  { label: "Medicine", value: "Medicine" },
+  { label: "Religion", value: "Religion" },
+  {
+    label: "Physical Education and Sport",
+    value: "Physical Education and Sport"
+  },
+  { label: "Agriculture", value: "Agriculture" },
+  { label: "Pharmacy term", value: "Pharmacy term" },
+  { label: "Physics", value: "Physics" },
+  { label: "Physiology", value: "Physiology" },
+  { label: "Folklore", value: "Folklore" },
+  { label: "Chemistry", value: "Chemistry" },
+  { label: "Economics", value: "Economics" },
+  { label: "Ethnography", value: "Ethnography" },
+  { label: "Legal term", value: "Legal term" }
 ];
 
 export const originOptions = [
-  { label: 'Выберите вариант происхождения слова', value: 0 },
-  { label: 'Арабское слово', value: 'Арабское слово' },
-  { label: 'Китайское слово', value: 'Китайское слово' },
-  { label: 'Русское слово', value: 'Русское слово' },
-  { label: 'Монгольский язык', value: 'Монгольский язык' },
-  { label: 'Персидское слово', value: 'Персидское слово' },
-  { label: 'Уйгурское слово', value: 'Уйгурское слово' },
-  { label: 'Китайско-Уйгурское слово', value: 'Китайско-Уйгурское слово' },
+  { label: "Choose an origin of a word", value: 0 },
+  { label: "Arabic word", value: "Arabic word" },
+  { label: "Chinese word", value: "Chinese word" },
+  { label: "Russian word", value: "Русское слово" },
+  { label: "Mongolian language", value: "Mongolian language" },
+  { label: "Persian word", value: "Persian word" },
+  { label: "Uyghur word", value: "Uyghur word" },
+  { label: "Chinese-uyghur word", value: "Chinese-uyghur word" },
   {
-    label: 'Монгольско-Уйгурское слово',
-    value: 'Могольско-Уйгурское слово'
+    label: "Mongol-uyghur word",
+    value: "Mongol-uyghur word"
   },
-  { label: 'Русско-уйгурское слово', value: 'Русско-уйгурское слово' },
-  { label: 'Арабско-Уйгурское слово', value: 'Арабско-Уйгурское слово' },
-  { label: 'Персидско-Уйгурское слово', value: 'Персидско-Уйгурское слово' }
+  { label: "Russian-uyghur word", value: "Russian-uyghur word" },
+  { label: "Arab-uyghur word", value: "Arab-uyghur word" },
+  { label: "Persian-uyghur word", value: "Persian-uyghur word" }
 ];
 
 export const lexisOptions = [
-  { label: 'Выберите лексику слова', value: 0 },
-  { label: 'В переносном значении', value: 'В переносном значении' },
-  { label: 'Малоупотребительно', value: 'Малоупотребительно' },
-  { label: 'Поговорка', value: 'Поговорка' },
-  { label: 'Пословица', value: 'Пословица' },
-  { label: 'В разных значениях', value: 'В разных значениях' },
-  { label: 'В прямом значении', value: 'В прямом значении' }
+  { label: "Choose lexis of a word", value: 0 },
+  { label: "In transferred use", value: "In transferred use" },
+  { label: "Rarely used", value: "Rarely used" },
+  { label: "Proverb", value: "Proverb" },
+  { label: "Saying", value: "Saying" },
+  { label: "In various meanings", value: "In various meanings" },
+  { label: "In direct meaning", value: "In direct meaning" }
 ];
 
 export const styleOptions = [
-  { label: 'Выберите стиль слова', value: 0 },
-  { label: 'Бранное слово', value: 'Бранное слово' },
-  { label: 'Поэтическое слово', value: 'Поэтическое слово' },
-  { label: 'Разговорное слово', value: 'Разговорное слово' },
-  { label: 'Книжный стиль', value: 'Книжный стиль' },
-  { label: 'Неодобрительно', value: 'Неодобрительно' },
-  { label: 'В ироничном смысле', value: 'В ироничном смысле' }
+  { label: "Choose a style of a word", value: 0 },
+  { label: "Swear word", value: "Swear word" },
+  { label: "Poetry word", value: "Poetry word" },
+  { label: "Разговорное слово", value: "Разговорное слово" },
+  { label: "Pedantic style", value: "Pedantic style" },
+  { label: "Disapproving", value: "Disapproving" },
+  { label: "Ironically", value: "Ironically" }
 ];
 
 export const partOfSpeechOptions = [
-  { label: 'Выберите часть речи к которому принадлежит слово', value: 0 },
-  { label: 'Вводное слово', value: 'Вводное слово' },
+  { label: "Choose a part of speech", value: 0 },
+  { label: "Parenthic word", value: "Parenthic word" },
   {
-    label: 'Вопросительное местоимение',
-    value: 'Вопросительное местоимение'
+    label: "Interrogative pronoun",
+    value: "Interrogative pronoun"
   },
-  { label: 'Вопросительная частица', value: 'Вопросительная частица' },
-  { label: 'Глагол', value: 'Глагол' },
+  { label: "Interrogative particle", value: "Interrogative particle" },
+  { label: "Verb", value: "Verb" },
   {
-    label: 'Количественное числительное',
-    value: 'Количественное числительное'
-  },
-  {
-    label: 'Существительное',
-    value: 'Существительное'
+    label: "Cardinal number",
+    value: "Cardinal number"
   },
   {
-    label: 'Порядковое числительное',
-    value: 'Порядковое числительное'
+    label: "Noun",
+    value: "Noun"
   },
   {
-    label: 'Междометие',
-    value: 'Междометие'
+    label: "Ordinal number",
+    value: "Ordinal number"
   },
   {
-    label: 'Звукоподражание',
-    value: 'Звукоподражание'
+    label: "Interjection",
+    value: "Interjection"
   },
   {
-    label: 'Личное местоимение',
-    value: 'Личное местоимение'
+    label: "Onomatopoeia",
+    value: "Onomatopoeia"
   },
   {
-    label: 'Местоимение',
-    value: 'Местоимение'
+    label: "Personal pronoun",
+    value: "Personal pronoun"
   },
   {
-    label: 'Отрицательная частица',
-    value: 'Отрицательная частица'
+    label: "Pronoun",
+    value: "Pronoun"
   },
   {
-    label: 'Имя прилагательное',
-    value: 'Имя прилагательное'
+    label: "Negative particle",
+    value: "Negative particle"
   },
   {
-    label: 'Причастие',
-    value: 'Причастие'
+    label: "Adjective",
+    value: "Adjective"
   },
   {
-    label: 'Разделительный союз',
-    value: 'Разделительный союз'
+    label: "Adverb",
+    value: "Adverb"
   },
   {
-    label: 'Собирательное существительное',
-    value: 'Собирательное существительное'
+    label: "Disjunctive conjunction",
+    value: "Disjunctive conjunction"
   },
   {
-    label: 'Соединительный союз',
-    value: 'Соединительный союз'
+    label: "Noun of multitude",
+    value: "Noun of multitude"
   },
   {
-    label: 'Указательное местоимение',
-    value: 'Указательное местоимение'
+    label: "Coordinate conjunction",
+    value: "Coordinate conjunction"
   },
   {
-    label: 'Число',
-    value: 'Число'
+    label: "Demonstrative pronoun",
+    value: "Demonstrative pronoun"
   },
   {
-    label: 'Усилительная частица',
-    value: 'Усилительная частица'
+    label: "Number",
+    value: "Number"
   },
   {
-    label: 'Утвердительная частица',
-    value: 'Утвердительная частица'
+    label: "Intensifying particle",
+    value: "Intensifying particle"
+  },
+  {
+    label: "Assertive particle",
+    value: "Assertive particle"
   }
 ];
 
 export const grammarOptions = [
-  { label: 'Выберите грамматику слова', value: 0 },
-  { label: 'Имя действия', value: 'Имя действия' },
-  { label: 'Лицо глагола', value: 'Лицо глагола' },
-  { label: 'Взаимный залог', value: 'Взаимный залог' },
-  { label: 'Возвратный залог', value: 'Возвратный залог' },
-  { label: 'Грамматика', value: 'Грамматика' },
-  { label: 'Дательный падеж', value: 'Дательный падеж' },
-  { label: 'Деепречастие', value: 'Деепречастие' },
-  { label: 'Единственное число', value: 'Единственное число' },
-  { label: 'Множественное число', value: 'Множественное число' },
-  { label: 'Многократный вид глагола', value: 'Многократный вид глагола' },
-  { label: 'Однократный вид глагола', value: 'Однократный вид глагола' },
-  { label: 'Направительный падеж', value: 'Направительный падеж' },
-  { label: 'Сравнительная степень', value: 'Сравнительная степень' },
-  { label: 'Страдательный залог', value: 'Страдательный залог' },
-  { label: 'Родительный падеж', value: 'Родительный падеж' },
-  { label: 'Уменьшительная форма', value: 'Уменьшительная форма' }
+  { label: "Выберите грамматику слова", value: 0 },
+  { label: "Имя действия", value: "Имя действия" },
+  { label: "Лицо глагола", value: "Лицо глагола" },
+  { label: "Взаимный залог", value: "Взаимный залог" },
+  { label: "Возвратный залог", value: "Возвратный залог" },
+  { label: "Грамматика", value: "Грамматика" },
+  { label: "Дательный падеж", value: "Дательный падеж" },
+  { label: "Деепречастие", value: "Деепречастие" },
+  { label: "Единственное число", value: "Единственное число" },
+  { label: "Множественное число", value: "Множественное число" },
+  { label: "Многократный вид глагола", value: "Многократный вид глагола" },
+  { label: "Однократный вид глагола", value: "Однократный вид глагола" },
+  { label: "Направительный падеж", value: "Направительный падеж" },
+  { label: "Сравнительная степень", value: "Сравнительная степень" },
+  { label: "Страдательный залог", value: "Страдательный залог" },
+  { label: "Родительный падеж", value: "Родительный падеж" },
+  { label: "Уменьшительная форма", value: "Уменьшительная форма" }
 ];

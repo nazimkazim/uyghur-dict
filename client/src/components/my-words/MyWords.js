@@ -7,9 +7,7 @@ import { getCurrentProfile } from '../../actions/profileActions';
 import { Link } from 'react-router-dom';
 
 class MyWords extends Component {
-  constructor(props) {
-    super(props);
-  }
+  
 
   state = {
     displayViewCard: false
@@ -48,14 +46,14 @@ class MyWords extends Component {
                     className="btn btn-primary btn-small btn-block"
                     to={`/my-words/${word._id}`}
                   >
-                    Изменить
+                    Edit
                   </Link>
                   <button
                     type="button"
                     className="btn btn-primary btn-small btn-block"
                     onClick={this.onDeleteClick.bind(this, word._id)}
                   >
-                    Удалить
+                    Delete
                   </button>
                 </div>
               </div>
@@ -63,7 +61,7 @@ class MyWords extends Component {
           </li>
         ));
       } else {
-        wordItems = <h4>Слов не найдено</h4>;
+        wordItems = <h4>Words not found</h4>;
       }
     }
     return (
@@ -72,7 +70,7 @@ class MyWords extends Component {
           <div className="col-md-4">
             <div className="card" style={{ width: '18rem' }}>
               <ul className="list-group list-group-flush">
-                <li className="list-group-item active">Мои слова</li>
+                <li className="list-group-item active">My words</li>
                 {wordItems}
               </ul>
             </div>

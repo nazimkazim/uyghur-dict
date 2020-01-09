@@ -46,7 +46,7 @@ class SearchWord extends Component {
                 className="form-control"
                 value={this.state.search}
                 onChange={this.updateSearch.bind(this)}
-                placeholder="Найти слово"
+                placeholder="Find a word"
                 aria-label="Username"
                 aria-describedby="addon-wrapping"
               />
@@ -67,7 +67,7 @@ class SearchWord extends Component {
                               class="btn btn-primary btn-sm"
                               data-tip={word.origin}
                             >
-                              происхождение слова
+                              origin
                             </div>
                             <ReactTooltip
                               place="bottom"
@@ -85,7 +85,7 @@ class SearchWord extends Component {
                               className="btn btn-primary btn-sm"
                               data-tip={word.partOfSpeech}
                             >
-                              часть речи
+                              part of speech
                             </div>
                             <ReactTooltip
                               place="bottom"
@@ -103,7 +103,7 @@ class SearchWord extends Component {
                               class="btn btn-primary btn-sm"
                               data-tip={word.style}
                             >
-                              стилистика
+                              style
                             </div>
                             <ReactTooltip
                               place="bottom"
@@ -121,7 +121,7 @@ class SearchWord extends Component {
                               class="btn btn-primary btn-sm"
                               data-tip={word.sphere}
                             >
-                              сфера
+                              sphere
                             </div>
                             <ReactTooltip
                               place="bottom"
@@ -132,14 +132,14 @@ class SearchWord extends Component {
                         ) : (
                           ''
                         )}{' '}
-                        {word.sphere ? (
+                        {word.lexis ? (
                           <span>
                             <div
                               type="button"
                               className="btn btn-primary btn-sm"
                               data-tip={word.lexis}
                             >
-                              лексика
+                              lexis
                             </div>
                             <ReactTooltip
                               place="bottom"
@@ -157,7 +157,7 @@ class SearchWord extends Component {
                               className="btn btn-primary btn-sm"
                               data-tip={word.grammar}
                             >
-                              грамматика
+                              grammar
                             </div>
                             <ReactTooltip
                               place="bottom"
