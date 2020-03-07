@@ -47,7 +47,6 @@ router.post(
           style: req.body.style,
           examples: req.body.examples
         });
-        
 
         newWord.save().then(word => {
           User.findOne({ _id: req.user.id })

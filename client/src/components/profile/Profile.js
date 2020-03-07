@@ -6,8 +6,6 @@ import { getCurrentProfile } from "../../actions/profileActions";
 //import { Link } from "react-router-dom";
 
 class Profile extends Component {
- 
-
   componentDidMount() {
     this.props.getCurrentProfile();
   }
@@ -38,14 +36,14 @@ class Profile extends Component {
                 <div className="row">
                   <div className="col">
                     {profile.social ? (
-                      <a href={profile.social.facebook} >
+                      <a href={profile.social.facebook}>
                         <i className="fab fa-facebook" />
                       </a>
                     ) : null}
                   </div>
                   <div className="col">
                     {profile.social ? (
-                      <a href={profile.social.vk} >
+                      <a href={profile.social.vk}>
                         <i className="fab fa-vk" />
                       </a>
                     ) : null}
