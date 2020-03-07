@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { searchWord } from '../../actions/wordActions';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import ReactTooltip from 'react-tooltip';
+import React, { Component } from "react";
+import { searchWord } from "../../actions/wordActions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import ReactTooltip from "react-tooltip";
 
 class SearchWord extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: ''
+      search: ""
     };
   }
 
@@ -30,7 +30,7 @@ class SearchWord extends Component {
       );
     });
 
-    //console.log(filteredWords);
+    console.log(filteredWords);
     return (
       <div className="container">
         <div className="row">
@@ -57,8 +57,11 @@ class SearchWord extends Component {
                 this.state.search.toLowerCase() ? (
                   <div key={word._id}>
                     <div>
-                      <h1 className="display-7">{word.ugrWordCyr}</h1>
-                      {word.ugrWordArb ? word.ugrWordArb : ''}
+                      <h1 className="display-7">
+                        {word.ugrWordCyr && word.ugrWordCyr}
+                      </h1>
+                      <h1>{word.ugrWordArb ? word.ugrWordArb : ""}</h1>
+                      <h1>{word.ugrWordLat ? word.ugrWordLat : ""}</h1>
                       <span>
                         {word.origin ? (
                           <span>
@@ -76,8 +79,8 @@ class SearchWord extends Component {
                             />
                           </span>
                         ) : (
-                          ''
-                        )}{' '}
+                          ""
+                        )}{" "}
                         {word.partOfSpeech ? (
                           <span>
                             <div
@@ -94,8 +97,8 @@ class SearchWord extends Component {
                             />
                           </span>
                         ) : (
-                          ''
-                        )}{' '}
+                          ""
+                        )}{" "}
                         {word.style ? (
                           <span>
                             <div
@@ -112,8 +115,8 @@ class SearchWord extends Component {
                             />
                           </span>
                         ) : (
-                          ''
-                        )}{' '}
+                          ""
+                        )}{" "}
                         {word.sphere ? (
                           <span>
                             <div
@@ -130,8 +133,8 @@ class SearchWord extends Component {
                             />
                           </span>
                         ) : (
-                          ''
-                        )}{' '}
+                          ""
+                        )}{" "}
                         {word.lexis ? (
                           <span>
                             <div
@@ -148,8 +151,8 @@ class SearchWord extends Component {
                             />
                           </span>
                         ) : (
-                          ''
-                        )}{' '}
+                          ""
+                        )}{" "}
                         {word.grammar ? (
                           <span>
                             <div
@@ -166,21 +169,44 @@ class SearchWord extends Component {
                             />
                           </span>
                         ) : (
-                          ''
+                          ""
                         )}
                       </span>
                     </div>
                     <hr className="my-4" />
-                    <p className="lead">{word.rusTranslation}</p>
+                    <p className="lead">
+                      {word.ugrWordCyr && word.ugrWordCyr} -{" "}
+                      {word.rusTranslation && word.rusTranslation}
+                    </p>
                     <hr className="my-4" />
-                    <span className="lead font-weight-bold">
-                      {word.example}
-                    </span>
-                    {word.example ? ' - ' : ''}
-                    <span className="lead">{word.exampleTranslation}</span>
+                    <p className="lead">
+                      {word.ugrWordLat ? word.ugrWordLat : ""} -{" "}
+                      {word.engTranslation && word.engTranslation}
+                    </p>
+                    {word.examples ? (
+                      <ul className="list-group">
+                        {word.examples &&
+                          word.examples.map(word => (
+                            <>
+                              <li className="list-group-item list-group-item-info">
+                                {word.exCyr && word.exCyr} -{" "}
+                                {word.trRus && word.trRus}
+                              </li>
+                              <li className="list-group-item">
+                                {word.exLat && word.exLat} (
+                                {word.exArab && word.exArab})-{" "}
+                                {word.trEng && word.trEng}
+                              </li>
+                              <hr />
+                            </>
+                          ))}
+                      </ul>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 ) : (
-                  ''
+                  ""
                 )
               )}
             </div>
@@ -199,7 +225,4 @@ const mapStateToProps = state => ({
   words: state.words
 });
 
-export default connect(
-  mapStateToProps,
-  { searchWord }
-)(SearchWord);
+export default connect(mapStateToProps, { searchWord })(SearchWord);
